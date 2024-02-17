@@ -50,8 +50,8 @@
                                     </span>
                             </th>
                             <th>
-                                <a class="btn btn-sm btn-outline-info mr-3"
-                                   href="#">ویرایش</a>
+                                <a class="btn btn-sm btn-success mr-3"
+                                   href="{{ route('category.edit', ['category'=>$category->id]) }}">ویرایش</a>
                             </th>
                         </tr>
                     @endforeach

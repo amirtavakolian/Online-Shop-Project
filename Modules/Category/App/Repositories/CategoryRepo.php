@@ -22,4 +22,14 @@ class CategoryRepo implements iCategoryRepo
     {
         return $this->all()->count();
     }
+
+    public function parents()
+    {
+        return Category::query()->where('parent_id', null)->get();
+    }
+
+    public function update(Category $category, $data)
+    {
+        return $category->update($data);
+    }
 }
