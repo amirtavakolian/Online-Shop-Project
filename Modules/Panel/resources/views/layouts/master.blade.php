@@ -12,6 +12,7 @@
     <!-- Custom fonts for this template-->
     <link href="{{ asset('modules/panel/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('modules/panel/css/sb-admin-2.min.css') }}" rel="stylesheet" type="text/css">
+    @yield('head')
 </head>
 
 <body id="page-top">
@@ -386,6 +387,7 @@
 <script src="{{ asset('modules/panel/js/Chart.min.js') }}"></script>
 <script src="{{ asset('modules/panel/js/demo/chart-area-demo.js') }}"></script>
 <script src="{{ asset('modules/panel/js/demo/chart-pie-demo.js') }}"></script>
+@yield('scripts')
 </body>
 
 </html>

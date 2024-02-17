@@ -32,4 +32,9 @@ class CategoryRepo implements iCategoryRepo
     {
         return $category->update($data);
     }
+
+    public function destroy(Category $category)
+    {
+        $category->delete();
+    }
 }

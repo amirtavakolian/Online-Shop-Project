@@ -1,7 +1,10 @@
 @extends('panel::layouts.master')
 
-@section('content')
+@section('head')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
 
+@section('content')
     <!-- Content Row -->
     <div class="row">
 
@@ -52,6 +55,8 @@
                             <th>
                                 <a class="btn btn-sm btn-success mr-3"
                                    href="{{ route('category.edit', ['category'=>$category->id]) }}">ویرایش</a>
+                                <a class="btn btn-sm btn-danger mr-3" data-category-id="{{ $category->id }}"
+                                   href="{{ route('category.destroy', ['category'=>$category->id]) }}">حذف</a>
                             </th>
                         </tr>
                     @endforeach
@@ -61,4 +66,30 @@
         </div>
 
     </div>
+@endsection
+@section('scripts')
+    <script>
+        const action = document.querySelector('tbody');
+        action.addEventListener("click", function (e) {
+            if (e.target.hasAttribute('data-category-id')) {
+                e.preventDefault();
+                if (confirm('آیا مطمئن هستید؟')) {
+                    {
+                        let route = '{{route('category.destroy', ['category'=>':category'])}}'
+                        route = route.replace(':category', e.target.attributes[1].value);
+                        const xhr = new XMLHttpRequest();
+                        xhr.open('DELETE', route);
+                        const token = document.querySelector('meta[name="csrf-token"]').content;
+                        xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                        xhr.send();
+                        xhr.addEventListener('load', function (response) {
+                            if (response.srcElement.status == 200) {
+                                window.location.reload();
+                            }
+                        })
+                    }
+                }
+            }
+        });
+    </script>
 @endsection

@@ -15,4 +15,6 @@ interface iCategoryRepo
     public function parents();
 
     public function update(Category $category, array $data);
+
+    public function destroy(Category $category);
 }
