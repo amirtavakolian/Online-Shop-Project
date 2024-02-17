@@ -13,8 +13,13 @@ class CategoryRepo implements iCategoryRepo
         return Category::all();
     }
 
-    public function store($data)
+    public function store(array $data)
     {
         Category::query()->create($data);
+    }
+
+    public function count()
+    {
+        return $this->all()->count();
     }
 }

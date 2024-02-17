@@ -18,6 +18,13 @@ class CategoryController extends Controller
     {
     }
 
+    public function index()
+    {
+        $categoriesCount = $this->categoryRepo->count();
+        $categories = $this->categoryRepo->all();
+        return view('category::index', compact('categoriesCount', 'categories'));
+    }
+
     public function create()
     {
         $categories = $this->categoryRepo->all();
@@ -30,10 +37,9 @@ class CategoryController extends Controller
             $this->categoryRepo->store($request->validated());
         } catch (Exception $e) {
             Log::info($e->getMessage());
-            return redirect()->back()->with('failed', 'something bad happen', 500);
+            return redirect()->back()->with('failed', 'مشکلی پیش آمده', 500);
         }
-        dd(5);
-        // return redirect()->back()->with('failed', 'something bad happen', 500);
+        return redirect()->route('category.index')->with('success', 'دسته بندی با موفقیت ساخته شد');
     }
 
 }
