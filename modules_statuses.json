@@ -1,4 +1,5 @@
 {
     "Panel": true,
-    "Category": true
+    "Category": true,
+    "Attributes": true
 }
