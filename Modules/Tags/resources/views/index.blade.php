@@ -12,7 +12,7 @@
             <div class="d-flex justify-content-between mb-4">
 
                 <h5 class="font-weight-bold">لیست تگ ها ({{ $tags->count() }})</h5>
-                <a class="btn btn-sm btn-outline-primary" href="#">
+                <a class="btn btn-sm btn-outline-primary" href="{{ route('tags.create') }}">
 
                     <i class="fa fa-plus"></i>
                     ایجاد تگ

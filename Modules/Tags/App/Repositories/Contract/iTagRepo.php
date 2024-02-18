@@ -12,5 +12,5 @@ interface iTagRepo
 
     public function count();
 
-
+    public function store(array $data);
 }

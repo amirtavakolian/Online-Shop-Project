@@ -18,5 +18,9 @@ class TagRepo implements iTagRepo
         return $this->all()->count();
     }
 
+    public function store(array $data)
+    {
+        Tag::query()->create($data);
+    }
 
 }
