@@ -1,5 +1,6 @@
 {
     "Panel": true,
     "Category": true,
-    "Attributes": true
+    "Attributes": true,
+    "Tags": true
 }
