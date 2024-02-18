@@ -17,4 +17,14 @@ class AttributeRepo implements iAttributeRepo
     {
         return $this->all()->count();
     }
+
+    public function create(array $data)
+    {
+        Attribute::query()->create($data);
+    }
+
+    public function update(array $data, Attribute $attribute)
+    {
+        $attribute->update($data);
+    }
 }

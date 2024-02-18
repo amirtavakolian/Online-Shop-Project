@@ -11,12 +11,12 @@
         <div class="col-xl-12 col-md-12 mb-4 p-md-5 bg-white">
             <div class="d-flex justify-content-between mb-4">
                 <h5 class="font-weight-bold">لیست ویژگی ها ({{ $attributesCount }})</h5>
-                <a class="btn btn-sm btn-outline-primary" href="#">
+                <a class="btn btn-sm btn-outline-primary" href="{{ route('attributes.create') }}">
                     <i class="fa fa-plus"></i>
                     ایجاد ویژگی
                 </a>
             </div>
-            @include('category::partials.messages')
+            @include('attributes::partials.messages')
             <div>
                 <table class="table table-bordered table-striped text-center">
 
@@ -37,7 +37,8 @@
                                 {{ $attribute->name }}
                             </th>
                             <th>
-                                <a class="btn btn-sm btn-success mr-3" href="#">ویرایش</a>
+                                <a class="btn btn-sm btn-success mr-3"
+                                   href="{{ route('attributes.edit', ['attribute'=>$attribute->id]) }}">ویرایش</a>
                                 <a class="btn btn-sm btn-danger mr-3" href="#">حذف</a>
                             </th>
                         </tr>
