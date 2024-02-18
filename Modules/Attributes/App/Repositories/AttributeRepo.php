@@ -27,4 +27,9 @@ class AttributeRepo implements iAttributeRepo
     {
         $attribute->update($data);
     }
+
+    public function delete(Attribute $attribute)
+    {
+        $attribute->delete();
+    }
 }

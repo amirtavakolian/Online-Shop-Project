@@ -39,7 +39,7 @@
                             <th>
                                 <a class="btn btn-sm btn-success mr-3"
                                    href="{{ route('attributes.edit', ['attribute'=>$attribute->id]) }}">ویرایش</a>
-                                <a class="btn btn-sm btn-danger mr-3" href="#">حذف</a>
+                                <a class="btn btn-sm btn-danger mr-3" data-attribute-id="{{ $attribute->id }}" href="#">حذف</a>
                             </th>
                         </tr>
                     @endforeach
@@ -50,3 +50,29 @@
     </div>
 @endsection
 
+@section('scripts')
+    <script>
+        const action = document.querySelector('tbody');
+        action.addEventListener("click", function (e) {
+            if (e.target.hasAttribute('data-attribute-id')) {
+                e.preventDefault();
+                if (confirm('آیا مطمئن هستید؟')) {
+                    {
+                        let route = '{{route('attributes.destroy', ['attribute'=>':attribute'])}}'
+                        route = route.replace(':attribute', e.target.attributes[1].value);
+                        const xhr = new XMLHttpRequest();
+                        xhr.open('DELETE', route);
+                        const token = document.querySelector('meta[name="csrf-token"]').content;
+                        xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                        xhr.send();
+                        xhr.addEventListener('load', function (response) {
+                            if (response.srcElement.status == 200) {
+                                window.location.reload();
+                            }
+                        })
+                    }
+                }
+            }
+        });
+    </script>
+@endsection

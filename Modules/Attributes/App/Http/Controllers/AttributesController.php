@@ -55,5 +55,22 @@ class AttributesController extends Controller
         }
         return redirect()->route('attributes.index')->with('success', 'ویژگی با موفقیت آپدیت شد');
     }
+
+    public function destroy(Attribute $attribute)
+    {
+        try {
+            $this->attributeRepo->delete($attribute);
+        } catch (Exception $e) {
+            Log::info('something bad happened' . self::class);
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'مشکل در حذف ویژگی'
+            ]);
+        }
+        return response()->json([
+            'status' => 'success',
+            'message' => 'ویژگی با موفقیت حذف شد.'
+        ]);
+    }
 }
 
