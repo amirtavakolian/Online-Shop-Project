@@ -49,13 +49,21 @@
             لورم
         </div>
 
+        <!-- Nav Item - Charts -->
+        @foreach(config('panel.items') as $config)
+            <li class="nav-item">
+                <a class="nav-link" href="{{ $config['url'] }}">
+                    <i class="{{ $config['class'] }}"></i>
+                    <span> {{ $config['name'] }} </span></a>
+            </li>
+        @endforeach
+
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-               aria-expanded="true"
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
                aria-controls="collapsePages">
                 <i class="fas fa-fw fa-folder"></i>
-                <span> صفحات </span>
+                <span>تغییر صفحات</span>
             </a>
             <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
@@ -69,20 +77,6 @@
                     <a class="collapse-item" href="#">Blank Page</a>
                 </div>
             </div>
-        </li>
-
-        <!-- Nav Item - Charts -->
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span> نمودار ها </span></a>
-        </li>
-
-        <!-- Nav Item - Tables -->
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="fas fa-fw fa-table"></i>
-                <span> جداول </span></a>
         </li>
 
         <!-- Divider -->
@@ -391,3 +385,4 @@
 </body>
 
 </html>
+

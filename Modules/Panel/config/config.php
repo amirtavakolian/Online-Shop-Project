@@ -1,5 +1,21 @@
 <?php
 
 return [
-    'name' => 'Panel',
+    'items' => [
+        [
+            'name' => 'دسته بندی ها',
+            'class' => 'fas fa-fw fa-folder',
+            'url' => url('panel/category')
+        ],
+        [
+            'name' => 'ویژگی ها',
+            'class' => 'fas fa-fw fa-table',
+            'url' => url('panel/attributes')
+        ],
+        [
+            'name' => 'تگ ها',
+            'class' => 'fas fa-fw fa-tag',
+            'url' => url('panel/tags')
+        ]
+    ]
 ];
