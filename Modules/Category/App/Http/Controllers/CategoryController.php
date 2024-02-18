@@ -64,6 +64,7 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $this->categoryRepo->destroy($category);
+        return redirect()->route('category.index')->with('success', 'دسته بندی با موفقیت حذف شد');
     }
 
 }
