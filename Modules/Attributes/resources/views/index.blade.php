@@ -41,14 +41,9 @@
                                 {{ $attribute->name }}
                             </th>
                             <th>
-<<<<<<< HEAD
-                                <a class="btn btn-sm btn-success mr-3" href="#">ویرایش</a>
-                                <a class="btn btn-sm btn-danger mr-3" href="#">حذف</a>
-=======
                                 <a class="btn btn-sm btn-success mr-3"
                                    href="{{ route('attributes.edit', ['attribute'=>$attribute->id]) }}">ویرایش</a>
                                 <a class="btn btn-sm btn-danger mr-3" data-attribute-id="{{ $attribute->id }}" href="#">حذف</a>
->>>>>>> feature/AttributeModule
                             </th>
                         </tr>
                     @endforeach
@@ -57,8 +52,6 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
-=======
 @endsection
 
 @section('scripts')
@@ -86,6 +79,5 @@
             }
         });
     </script>
->>>>>>> feature/AttributeModule
 @endsection
 

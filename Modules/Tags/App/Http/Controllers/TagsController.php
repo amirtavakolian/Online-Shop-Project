@@ -9,5 +9,9 @@ use Illuminate\Http\Response;
 
 class TagsController extends Controller
 {
-    
+
+    public function index()
+    {
+
+    }
 }
