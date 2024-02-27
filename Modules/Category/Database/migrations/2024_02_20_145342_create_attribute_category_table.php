@@ -10,14 +10,14 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('attribute_category', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('slug');
-            $table->unsignedBigInteger('parent_id')->nullable();
-            $table->foreign('parent_id')->references('id')->on('categories');
-            $table->text('description');
-            $table->boolean('is_active');
+            $table->foreignId('attribute_id');
+            $table->foreignId('category_id');
+            $table->boolean('is_filter');
+            $table->boolean('is_variation');
+
+            $table->unique(['attribute_id', 'category_id']);
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('attribute_category');
     }
 };
