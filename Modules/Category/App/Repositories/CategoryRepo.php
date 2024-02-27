@@ -60,6 +60,7 @@ class CategoryRepo implements iCategoryRepo
 
     public function destroy(Category $category)
     {
+        $category->attributes()->detach();
         $category->delete();
     }
 }
