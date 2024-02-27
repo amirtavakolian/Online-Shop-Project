@@ -49,13 +49,14 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
         $categories = $this->categoryRepo->parents();
-        return view('category::edit', compact('categories', 'category'));
+        $attributes = Attribute::all();
+        return view('category::edit', compact('categories', 'category', 'attributes'));
     }
 
     public function update(UpdatePostRequest $request, Category $category)
     {
         try {
-            $this->categoryRepo->update($category, $request->validated());
+            $this->categoryRepo->update($category, $request->all());
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return redirect()->back()->with('failed', 'مشکلی در آپدیت پیش آمده', 500);

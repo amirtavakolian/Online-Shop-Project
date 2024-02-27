@@ -36,4 +36,12 @@ class Category extends Model
         return $this->belongsToMany(Attribute::class);
     }
 
+    public function isFilter($attribute)
+    {
+        return in_array($attribute->id, $this->attributes()->wherePivot('is_filter', 1)
+            ->get()
+            ->pluck('id')
+            ->toArray());
+    }
+
 }

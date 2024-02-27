@@ -46,7 +46,16 @@ class CategoryRepo implements iCategoryRepo
 
     public function update(Category $category, $data)
     {
-        return $category->update($data);
+        $updatedCategory = $category->update($data);
+        $category->attributes()->syncWithPivotValues($data['attribute_is_filter_ids'], [
+            'is_filter' => 1,
+            'is_variation' => 0
+        ]);
+        $category->attributes()->attach($data['variation_id'], [
+            'is_filter' => 0,
+            'is_variation' => 1
+        ]);
+
     }
 
     public function destroy(Category $category)
