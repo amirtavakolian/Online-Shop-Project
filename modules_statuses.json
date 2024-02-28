@@ -3,5 +3,6 @@
     "Category": true,
     "Attributes": true,
     "Tags": true,
-    "Product": true
+    "Product": true,
+    "Brand": true
 }
