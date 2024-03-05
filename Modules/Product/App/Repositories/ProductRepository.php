@@ -2,6 +2,8 @@
 
 namespace Modules\Product\App\Repositories;
 
+use Exception;
+use Illuminate\Support\Facades\DB;
 use Modules\Product\App\Models\Product;
 use Modules\Product\App\Repositories\Contract\IProductRepository;
 
@@ -42,5 +44,27 @@ class ProductRepository implements IProductRepository
         }
         $refactorAttributes[0]['attribute_id'] = 1;
         $product->variationAttribute()->sync($refactorAttributes);
+    }
+
+    public function update(Product $product, $data)
+    {
+        $product->update([
+            "name" => $data['name'],
+            "brand_id" => $data['brand_id'],
+            "is_active" => $data['is_active'],
+            "description" => $data["description"],
+            "delivery_amount_per_product" => $data["delivery_amount_per_product"],
+            "delivery_amount" => $data["delivery_amount"],
+        ]);
+        $product->tags()->sync($data['tag_ids']);
+        $product->attributes()->sync($data['attribute_values']);
+        foreach ($data['variation_values'] as $attribute) {
+            $product->variationAttribute()->sync([$data["attirbute_id"] => $attribute]);
+        }
+    }
+
+    public function updateProductCategory()
+    {
+
     }
 }

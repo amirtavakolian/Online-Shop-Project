@@ -8,15 +8,19 @@ Twitter: @yatabani
 MIT License, https://github.com/cozeit/czMore/blob/master/LICENSE.md
 */
 (function ($, undefined) {
+    "use strict";
+
     $.fn.czMore = function (options) {
 
         //Set defauls for the control
         var defaults = {
-            max: 5,
+            max: 50,
             min: 0,
             onLoad: null,
             onAdd: null,
-            onDelete: null
+            onDelete: null,
+            styleOverride: false,
+            countFieldPrefix: '_czMore_txtCount',
         };
         //Update unset options with defaults if needed
         var options = $.extend(defaults, options);
@@ -29,12 +33,13 @@ MIT License, https://github.com/cozeit/czMore/blob/master/LICENSE.md
         $(this).bind("onDelete", function (event, data) {
             options.onDelete.call(event, data);
         });
+
         //Executing functionality on all selected elements
         return this.each(function () {
             var obj = $(this);
-            var i = obj.children(".recordset").size();
-            var divPlus = '<div id="btnPlus" />';
-            var count = '<input id="' + this.id + '_czMore_txtCount" name="' + this.id + '_czMore_txtCount" type="hidden" value="0" size="5" />';
+            var i = recordsetCount();
+            var divPlus = '<div id="btnPlus" class="btnPlus"/>';
+            var count = '<input id="' + this.id + options.countFieldPrefix + '" name="' + this.id + options.countFieldPrefix + '" type="hidden" value="0" size="5" />';
 
             obj.before(count);
             var recordset = obj.children("#first");
@@ -42,20 +47,25 @@ MIT License, https://github.com/cozeit/czMore/blob/master/LICENSE.md
             var set = recordset.children(".recordset").children().first();
             var btnPlus = obj.siblings("#btnPlus");
 
-            btnPlus.css({
-                'float': 'right',
-                'border': '0px',
-                'background-image': 'url("img/add.png")',
-                'background-position': 'center center',
-                'background-repeat': 'no-repeat',
-                'height': '25px',
-                'width': '25px',
-                'cursor': 'pointer'
-            });
+            if(!options.styleOverride) {
+              btnPlus.css({
+                  'float': 'right',
+                  'border': '0px',
+                  'background-image': 'url("img/add.png")',
+                  'background-position': 'center center',
+                  'background-repeat': 'no-repeat',
+                  'height': '25px',
+                  'width': '25px',
+                  'cursor': 'pointer',
+              });
+            }
 
             if (recordset.length) {
                 obj.siblings("#btnPlus").click(function () {
-                    var i = obj.children(".recordset").size();
+                    if (isMaxRecordset()){
+                        return false;
+                    }
+                    var i = recordsetCount();
                     var item = recordset.clone().html();
                     i++;
                     item = item.replace(/\[([0-9]\d{0})\]/g, "[" + i + "]");
@@ -71,7 +81,7 @@ MIT License, https://github.com/cozeit/czMore/blob/master/LICENSE.md
                         obj.trigger("onAdd", i);
                     }
 
-                    obj.siblings("input[name$='czMore_txtCount']").val(i);
+                    obj.siblings("input[name$='" + options.countFieldPrefix + "']").val(i);
                     return false;
                 });
                 recordset.remove();
@@ -94,8 +104,8 @@ MIT License, https://github.com/cozeit/czMore/blob/master/LICENSE.md
             function resetNumbering() {
                 $(obj).children(".recordset").each(function (index, element) {
                    $(element).find('input:text, input:password, input:file, select, textarea').each(function(){
-                        old_name = this.name;
-                        new_name = old_name.replace(/\_([0-9]\d{0})\_/g, "_" + (index + 1) + "_");
+                        var old_name = this.name;
+                        var new_name = old_name.replace(/\_([0-9]\d{0})\_/g, "_" + (index + 1) + "_");
                         this.id = this.name = new_name;
                         //alert(this.name);
                     });
@@ -105,34 +115,44 @@ MIT License, https://github.com/cozeit/czMore/blob/master/LICENSE.md
             }
 
             function loadMinus(recordset) {
-                var divMinus = '<div id="btnMinus" />';
+                var divMinus = '<div id="btnMinus" class="btnMinus" />';
                 $(recordset).children().first().before(divMinus);
                 var btnMinus = $(recordset).children("#btnMinus");
-                btnMinus.css({
-                    'float': 'right',
-                    'border': '0px',
-                    'background-image': 'url("img/remove.png")',
-                    'background-position': 'center center',
-                    'background-repeat': 'no-repeat',
-                    'height': '25px',
-                    'width': '25px',
-                    'cursor': 'poitnter'
-                });
+                if(!options.styleOverride) {
+                  btnMinus.css({
+                      'float': 'right',
+                      'border': '0px',
+                      'background-image': 'url("img/remove.png")',
+                      'background-position': 'center center',
+                      'background-repeat': 'no-repeat',
+                      'height': '25px',
+                      'width': '25px',
+                      'cursor': 'poitnter',
+                  });
+              }
             }
 
             function minusClick(recordset) {
                 $(recordset).children("#btnMinus").click(function () {
-                    var i = obj.children(".recordset").size();
+                    var i = recordsetCount();
                     var id = $(recordset).attr("data-id")
                     $(recordset).remove();
                     resetNumbering();
-                    obj.siblings("input[name$='czMore_txtCount']").val(obj.children(".recordset").size());
+                    obj.siblings("input[name$='" + options.countFieldPrefix + "']").val(obj.children(".recordset").length);
                     i--;
                     if (options.onDelete != null) {
                         if (id != null)
                             obj.trigger("onDelete", id);
                     }
                 });
+            }
+
+            function recordsetCount(){
+                return obj.children(".recordset").length;
+            }
+
+            function isMaxRecordset(){
+                return recordsetCount() >= options.max;
             }
         });
     };

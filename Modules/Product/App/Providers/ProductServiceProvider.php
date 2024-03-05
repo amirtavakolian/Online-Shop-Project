@@ -4,6 +4,8 @@ namespace Modules\Product\App\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Modules\Product\App\Models\Product;
+use Modules\Product\App\Observers\ProductObserver;
 use Modules\Product\App\Repositories\Contract\IProductRepository;
 use Modules\Product\App\Repositories\ProductRepository;
 use Modules\Product\App\Services\FileUploader;
@@ -25,6 +27,7 @@ class ProductServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/migrations'));
+        Product::observe(ProductObserver::class);
     }
 
     /**

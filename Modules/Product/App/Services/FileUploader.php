@@ -3,11 +3,12 @@
 namespace Modules\Product\App\Services;
 
 use Illuminate\Support\Str;
+use Modules\Product\App\Models\Product;
 
 class FileUploader
 {
 
-    public function upload($file, $location, $driver = 'local')
+    public function upload($file, $location, $driver = 'public')
     {
         return $file->storeAs(
             $location, Str::random(20) . '.' . $file->getClientOriginalExtension(),
@@ -15,7 +16,7 @@ class FileUploader
         );
     }
 
-    public function uploadFiles($files, $location, $driver = 'local')
+    public function uploadFiles($files, $location, $driver = 'public')
     {
         $filePaths = [];
         foreach ($files as $file) {
@@ -23,4 +24,5 @@ class FileUploader
         }
         return $filePaths;
     }
+
 }
