@@ -3,17 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Banner\App\Http\Controllers\BannerController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-Route::group([], function () {
-    Route::resource('banner', BannerController::class)->names('banner');
+Route::group(['prefix' => '/panel'], function () {
+    Route::resource('banners', BannerController::class)
+        ->except('show')
+        ->names([
+            'index' => 'panel.banners.index',
+            'create' => 'panel.banners.create',
+            'store' => 'panel.banners.store',
+        ]);
 });
+

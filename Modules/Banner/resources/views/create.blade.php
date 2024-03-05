@@ -7,8 +7,8 @@
                     <h5 class="font-weight-bold">ایجاد بنر</h5>
                 </div>
                 <hr>
-                @include('')
-                <form action="{{ route('admin.banners.store') }}" method="POST" enctype="multipart/form-data">
+                @include('banner::partials.messages')
+                <form action="{{ route('panel.banners.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-row">
                         <div class="form-group col-md-3">
@@ -31,7 +31,7 @@
 
                         <div class="form-group col-md-3">
                             <label for="priority">الویت</label>
-                            <input class="form-control" id="priority" name="priority" type="number" {{ old('priority') }}>
+                            <input class="form-control" id="priority" name="priority" type="text" {{ old('priority') }}>
                         </div>
 
                         <div class="form-group col-md-3">
@@ -57,13 +57,9 @@
                             <input class="form-control" id="button_link" name="button_link" type="text" {{ old('button_link') }}>
                         </div>
 
-                        <div class="form-group col-md-3">
-                            <label for="button_icon">آیکون دکمه</label>
-                            <input class="form-control" id="button_icon" name="button_icon" type="text" {{ old('button_icon') }}>
-                        </div>
                     </div>
                     <button class="btn btn-outline-primary mt-5" type="submit">ثبت</button>
-                    <a href="{{ route('admin.banners.index') }}" class="btn btn-dark mt-5 mr-3">بازگشت</a>
+                    <a href="#" class="btn btn-dark mt-5 mr-3">بازگشت</a>
                 </form>
             </div>
         </div>
