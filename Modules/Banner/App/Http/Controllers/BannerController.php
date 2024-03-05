@@ -21,6 +21,12 @@ class BannerController extends Controller
     {
     }
 
+    public function index()
+    {
+        $banners = $this->bannerRepository->all();
+        return view('banner::index', compact('banners'));
+    }
+
     public function create()
     {
         return view('banner::create');
@@ -32,7 +38,7 @@ class BannerController extends Controller
         $bannerImage = $this->fileUploader->upload($request->file('image'), '/banners');
         $bannerData['image'] = $bannerImage;
         $this->bannerRepository->store($bannerData);
-        // return
+        return redirect()->route('panel.banners.index')->with('success', 'بنر با موفقیت ساخته شد');
     }
 }
 

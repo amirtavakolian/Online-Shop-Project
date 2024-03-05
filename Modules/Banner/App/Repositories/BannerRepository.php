@@ -12,4 +12,9 @@ class BannerRepository implements IBannerRepository
     {
         Banner::query()->create($data);
     }
+
+    public function all()
+    {
+        return Banner::all();
+    }
 }
