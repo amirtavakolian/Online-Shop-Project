@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 use Modules\Tags\App\Http\Requests\StoreTagRequest;
 use Modules\Tags\App\Repositories\Contract\iTagRepo;
 
@@ -30,7 +31,7 @@ class TagsController extends Controller
         return view('tags::create');
     }
 
-    public function store(StoreTagRequest $request)
+    public function store(Request $request)
     {
         try {
             $this->tagRepo->store($request->validated());

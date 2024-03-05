@@ -2,5 +2,7 @@
     "Panel": true,
     "Category": true,
     "Attributes": true,
-    "Tags": true
+    "Tags": true,
+    "Product": true,
+    "Brand": true
 }

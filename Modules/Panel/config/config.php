@@ -16,6 +16,16 @@ return [
             'name' => 'تگ ها',
             'class' => 'fas fa-fw fa-tag',
             'url' => url('panel/tags')
+        ],
+        [
+            'name' => 'برند ها',
+            'class' => 'fas fa-fw fa-hashtag',
+            'url' => url('panel/brands')
+        ],
+        [
+            'name' => 'محصولات',
+            'class' => 'fas fa-fw fa-pump-soap',
+            'url' => url('panel/products')
         ]
     ]
 ];
