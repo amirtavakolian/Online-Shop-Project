@@ -4,5 +4,6 @@
     "Attributes": true,
     "Tags": true,
     "Product": true,
-    "Brand": true
+    "Brand": true,
+    "Banner": true
 }
