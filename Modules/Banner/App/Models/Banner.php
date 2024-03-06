@@ -14,4 +14,9 @@ class Banner extends Model
         "is_active", "type", "button_text",
         "button_link", "image"
     ];
+
+    public function IsStatusActive()
+    {
+        return $this->is_active != 1 ? 'selected' : '';
+    }
 }

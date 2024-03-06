@@ -10,6 +10,8 @@ Route::group(['prefix' => '/panel'], function () {
             'index' => 'panel.banners.index',
             'create' => 'panel.banners.create',
             'store' => 'panel.banners.store',
+            'edit' => 'panel.banners.edit',
+            'update' => 'panel.banners.update',
         ]);
 });
 

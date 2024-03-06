@@ -62,7 +62,7 @@
                             </th>
                             <th>
                                 <a class="btn btn-sm btn-outline-info mr-3"
-                                   href="#">ویرایش</a>
+                                   href="{{ route('panel.banners.edit', ['banner' => $banner]) }}">ویرایش</a>
                             </th>
                         </tr>
                     @endforeach

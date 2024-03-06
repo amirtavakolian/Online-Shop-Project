@@ -17,4 +17,9 @@ class BannerRepository implements IBannerRepository
     {
         return Banner::all();
     }
+
+    public function update(array $data, Banner $banner)
+    {
+        $banner->update($data);
+    }
 }
