@@ -26,6 +26,11 @@ return [
             'name' => 'محصولات',
             'class' => 'fas fa-fw fa-pump-soap',
             'url' => url('panel/products')
-        ]
+        ],
+        [
+            'name' => 'بنرها',
+            'class' => 'fas fa-laugh-wink',
+            'url' => url('panel/banners')
+        ],
     ]
 ];
