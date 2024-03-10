@@ -3,6 +3,7 @@
 namespace Modules\Index\App\Repositories;
 
 use Modules\Index\App\Models\Banner;
+use Modules\Index\App\Models\Category;
 use Modules\Index\App\Repositories\Contract\IIndexRepository;
 use Modules\Index\App\Models\Product;
 
@@ -21,5 +22,10 @@ class IndexRepository implements IIndexRepository
     public function products()
     {
         return Product::all();
+    }
+
+    public function categories()
+    {
+        return Category::query()->where('parent_id', null)->with('children')->get();
     }
 }

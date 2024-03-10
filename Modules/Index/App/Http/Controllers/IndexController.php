@@ -16,6 +16,7 @@ class IndexController extends Controller
     {
         list($sliders, $indexBottomBanners, $indexTopBanners) = $this->indexRepository->banners();
         $products = $this->indexRepository->products();
-        return view('index::index', compact('sliders', 'indexBottomBanners', 'indexTopBanners', 'products'));
+        $categories = $this->indexRepository->categories();
+        return view('index::index', compact('sliders', 'indexBottomBanners', 'indexTopBanners', 'products', 'categories'));
     }
 }

@@ -10,4 +10,6 @@ interface IIndexRepository
     public function banners();
 
     public function products();
+
+    public function categories();
 }
