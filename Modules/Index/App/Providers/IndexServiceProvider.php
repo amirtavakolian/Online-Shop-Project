@@ -4,6 +4,8 @@ namespace Modules\Index\App\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Modules\Index\App\Repositories\IndexRepository;
+use Modules\Index\App\Repositories\Contract\IIndexRepository;
 
 class IndexServiceProvider extends ServiceProvider
 {
@@ -30,6 +32,9 @@ class IndexServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->register(RouteServiceProvider::class);
+        $this->app->singleton(IIndexRepository::class, function (){
+            return new IndexRepository();
+        });
     }
 
     /**

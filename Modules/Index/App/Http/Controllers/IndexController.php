@@ -3,65 +3,19 @@
 namespace Modules\Index\App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Modules\Index\App\Repositories\Contract\IIndexRepository;
 
 class IndexController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
+    public function __construct(private IIndexRepository $indexRepository)
+    {
+    }
+
     public function index()
     {
-        return view('index::index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('index::create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request): RedirectResponse
-    {
-        //
-    }
-
-    /**
-     * Show the specified resource.
-     */
-    public function show($id)
-    {
-        return view('index::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($id)
-    {
-        return view('index::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, $id): RedirectResponse
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($id)
-    {
-        //
+        list($sliders, $indexBottomBanners, $indexTopBanners) = $this->indexRepository->banners();
+        $products = $this->indexRepository->products();
+        return view('index::index', compact('sliders', 'indexBottomBanners', 'indexTopBanners', 'products'));
     }
 }
