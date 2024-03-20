@@ -9,7 +9,6 @@
                         </a>
                     </div>
                 </div>
-
                 <div class="col-xl-7 col-lg-7">
                     <div class="main-menu text-center">
                         <nav>
@@ -24,15 +23,19 @@
                                     <a href="shop.html"> فروشگاه </a>
 
                                     <ul class="mega-menu">
-                                        @foreach($categories as $category)
-                                        <li>
-                                            <a class="menu-title" href="#">{{ $category->name }}</a>
-                                            @foreach($category->children as $child)
-                                                <ul>
-                                                    <li><a href="#">{{ $child->name }}</a></li>
-                                                </ul>
-                                            @endforeach
-                                        </li>
+                                        @foreach($headerCategories as $category)
+                                            <li>
+                                                <a class="menu-title" href="#">{{ $category->name }}</a>
+                                                @foreach($category->children as $child)
+                                                    <ul>
+                                                        <li>
+                                                            <a href="{{ route('index.categories', ['category' => $child->slug]) }}">
+                                                                {{ $child->name }}
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                @endforeach
+                                            </li>
                                         @endforeach
                                     </ul>
                                 </li>

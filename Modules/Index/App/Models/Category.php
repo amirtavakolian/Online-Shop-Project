@@ -10,6 +10,7 @@ use Modules\Index\App\Models\Product;
 class Category extends Model
 {
     use HasFactory;
+    protected $with = ['children'];
 
     public function products()
     {

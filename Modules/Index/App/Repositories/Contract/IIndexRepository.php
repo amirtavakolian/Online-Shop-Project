@@ -11,5 +11,4 @@ interface IIndexRepository
 
     public function products();
 
-    public function categories();
 }

@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html class="no-js" lang="zxx">
+@extends('index::layouts.master')
 
-@include('index::sections.head')
-
-<body>
-<div class="wrapper">
-
-    @include('index::sections.header')
+@section('content')
     @include('index::sections.slider')
 
     <div class="banner-area pt-100 pb-65">
@@ -135,135 +129,6 @@
             </div>
         </div>
     </div>
-
-    <div class="testimonial-area pt-80 pb-95 section-margin-1" style="background-image: url('assets/a.png')">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-10 ml-auto mr-auto">
-                    <div class="testimonial-active owl-carousel nav-style-1">
-                        <div class="single-testimonial text-center">
-                            <img src="assets/img/testimonial/testi-1.png" alt=""/>
-                            <p>
-                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک
-                                است. چاپگرها و
-                                متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد
-                                نیاز و
-                                کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد
-                                گذشته، حال و
-                                آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="banner-area pb-120">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-6 text-right">
-                    <div class="single-banner mb-30 scroll-zoom">
-                        <a href="product-details.html"><img src="assets/img/banner/banner-4.png" alt=""/></a>
-                        <div class="banner-content banner-position-3">
-                            <h3>لورم ایپسوم</h3>
-                            <h2>لورم ایپسوم <br/>متن </h2>
-                            <a href="product-details.html">فروشگاه</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 text-right">
-                    <div class="single-banner mb-30 scroll-zoom">
-                        <a href="product-details.html"><img src="assets/img/banner/banner-5.png" alt=""/></a>
-                        <div class="banner-content banner-position-4">
-                            <h3>لورم ایپسوم</h3>
-                            <h2>لورم ایپسوم </h2>
-                            <a href="product-details.html">فروشگاه</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="feature-area" style="direction: rtl;">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-4 col-lg-4 col-md-4">
-                    <div class="single-feature text-right mb-40">
-                        <div class="feature-icon">
-                            <img src="assets/img/icon-img/free-shipping.png" alt=""/>
-                        </div>
-                        <div class="feature-content">
-                            <h4>لورم ایپسوم</h4>
-                            <p>لورم ایپسوم متن ساختگی</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-4">
-                    <div class="single-feature text-right mb-40 pl-50">
-                        <div class="feature-icon">
-                            <img src="assets/img/icon-img/support.png" alt=""/>
-                        </div>
-                        <div class="feature-content">
-                            <h4>لورم ایپسوم</h4>
-                            <p>24x7 لورم ایپسوم</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-4">
-                    <div class="single-feature text-right mb-40">
-                        <div class="feature-icon">
-                            <img src="assets/img/icon-img/security.png" alt=""/>
-                        </div>
-                        <div class="feature-content">
-                            <h4>لورم ایپسوم</h4>
-                            <p>لورم ایپسوم متن ساختگی</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <footer class="footer-area bg-paleturquoise" style="direction: rtl;">
-        <div class="container">
-            <div class="footer-top text-center pt-45 pb-45">
-                <nav>
-                    <ul>
-                        <li><a href="index.html">صفحه ای اصلی </a></li>
-                        <li><a href="shop.html">فروشگاه </a></li>
-                        <li><a href="contact-us.html">تماس با ما </a></li>
-                        <li><a href="about-us.html">ارتباط با ما </a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-        <div class="footer-bottom border-top-1 pt-20">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-4 col-md-5 col-12">
-                        <div class="footer-social pb-20">
-                            <a href="#">اینستاگرام</a>
-                            <a href="#">تویتر</a>
-                            <a href="#">فیسبوک</a>
-                            <a href="#">لینکدین</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-12">
-                        <div class="copyright text-center pb-20">
-                            <p>Copyright © WebProg.ir</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-3 col-12">
-                        <div class="payment-mathod pb-20">
-                            <a href="#"><img src="assets/img/icon-img/payment.png" alt=""/></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-
     <!-- Start Modal -->
     @foreach($products as $product)
         <div class="modal fade" id="modal-{{ $product->id }}" tabindex="-1" role="dialog">
@@ -379,6 +244,95 @@
     @endforeach
     <!-- Modal end -->
 
-</div>
+    <div class="testimonial-area pt-80 pb-95 section-margin-1" style="background-image: url('assets/a.png')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 ml-auto mr-auto">
+                    <div class="testimonial-active owl-carousel nav-style-1">
+                        <div class="single-testimonial text-center">
+                            <img src="assets/img/testimonial/testi-1.png" alt=""/>
+                            <p>
+                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک
+                                است. چاپگرها و
+                                متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد
+                                نیاز و
+                                کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد
+                                گذشته، حال و
+                                آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="banner-area pb-120">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 text-right">
+                    <div class="single-banner mb-30 scroll-zoom">
+                        <a href="product-details.html"><img src="assets/img/banner/banner-4.png" alt=""/></a>
+                        <div class="banner-content banner-position-3">
+                            <h3>لورم ایپسوم</h3>
+                            <h2>لورم ایپسوم <br/>متن </h2>
+                            <a href="product-details.html">فروشگاه</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 text-right">
+                    <div class="single-banner mb-30 scroll-zoom">
+                        <a href="product-details.html"><img src="assets/img/banner/banner-5.png" alt=""/></a>
+                        <div class="banner-content banner-position-4">
+                            <h3>لورم ایپسوم</h3>
+                            <h2>لورم ایپسوم </h2>
+                            <a href="product-details.html">فروشگاه</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-@include('index::sections.scripts')
+    <div class="feature-area" style="direction: rtl;">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-4 col-lg-4 col-md-4">
+                    <div class="single-feature text-right mb-40">
+                        <div class="feature-icon">
+                            <img src="assets/img/icon-img/free-shipping.png" alt=""/>
+                        </div>
+                        <div class="feature-content">
+                            <h4>لورم ایپسوم</h4>
+                            <p>لورم ایپسوم متن ساختگی</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4">
+                    <div class="single-feature text-right mb-40 pl-50">
+                        <div class="feature-icon">
+                            <img src="assets/img/icon-img/support.png" alt=""/>
+                        </div>
+                        <div class="feature-content">
+                            <h4>لورم ایپسوم</h4>
+                            <p>24x7 لورم ایپسوم</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4">
+                    <div class="single-feature text-right mb-40">
+                        <div class="feature-icon">
+                            <img src="assets/img/icon-img/security.png" alt=""/>
+                        </div>
+                        <div class="feature-content">
+                            <h4>لورم ایپسوم</h4>
+                            <p>لورم ایپسوم متن ساختگی</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+@endsection

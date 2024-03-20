@@ -26,7 +26,7 @@ class Product extends Model
             $salesStartDate = Carbon::parse($productVariation->date_on_sale_from);
             $salesEndDate = Carbon::parse($productVariation->date_on_sale_to);
 
-            if ($salesStartDate->startOfDay()->gte($now->startOfDay())
+            if ($now->startOfDay()->gte($salesStartDate->startOfDay())
                 &&
                 $now->startOfDay()->lte($salesEndDate->startOfDay())
             ) {

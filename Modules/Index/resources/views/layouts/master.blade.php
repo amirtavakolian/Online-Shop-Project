@@ -1,29 +1,50 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html class="no-js" lang="zxx">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <title>Index Module - {{ config('app.name', 'Laravel') }}</title>
-
-    <meta name="description" content="{{ $description ?? '' }}">
-    <meta name="keywords" content="{{ $keywords ?? '' }}">
-    <meta name="author" content="{{ $author ?? '' }}">
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-    {{-- Vite CSS --}}
-    {{-- {{ module_vite('build-index', 'resources/assets/sass/app.scss') }} --}}
-</head>
+@include('index::sections.head')
 
 <body>
+<div class="wrapper">
+    @include('index::sections.header')
     @yield('content')
+    <footer class="footer-area bg-paleturquoise" style="direction: rtl;">
+        <div class="container">
+            <div class="footer-top text-center pt-45 pb-45">
+                <nav>
+                    <ul>
+                        <li><a href="index.html">صفحه ای اصلی </a></li>
+                        <li><a href="shop.html">فروشگاه </a></li>
+                        <li><a href="contact-us.html">تماس با ما </a></li>
+                        <li><a href="about-us.html">ارتباط با ما </a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="footer-bottom border-top-1 pt-20">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-4 col-md-5 col-12">
+                        <div class="footer-social pb-20">
+                            <a href="#">اینستاگرام</a>
+                            <a href="#">تویتر</a>
+                            <a href="#">فیسبوک</a>
+                            <a href="#">لینکدین</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-12">
+                        <div class="copyright text-center pb-20">
+                            <p>Copyright © WebProg.ir</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-3 col-12">
+                        <div class="payment-mathod pb-20">
+                            <a href="#"><img src="assets/img/icon-img/payment.png" alt=""/></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
 
-    {{-- Vite JS --}}
-    {{-- {{ module_vite('build-index', 'resources/assets/js/app.js') }} --}}
-</body>
+@include('index::sections.scripts')

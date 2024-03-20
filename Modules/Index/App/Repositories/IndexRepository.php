@@ -24,8 +24,4 @@ class IndexRepository implements IIndexRepository
         return Product::all();
     }
 
-    public function categories()
-    {
-        return Category::query()->where('parent_id', null)->with('children')->get();
-    }
 }
