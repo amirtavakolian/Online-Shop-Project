@@ -11,4 +11,9 @@ class AuthRepo implements IAuthRepo
     {
         return User::query()->create($userCredentials);
     }
+
+    public function findUserByEmail($email)
+    {
+        return User::query()->where('email', $email)->first();
+    }
 }
