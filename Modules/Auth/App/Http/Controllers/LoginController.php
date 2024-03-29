@@ -5,6 +5,7 @@ namespace Modules\Auth\App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UnlockEmailRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redis;
@@ -45,7 +46,8 @@ class LoginController extends Controller
                 $user->is_locked = 1;
             }
         }
-        return redirect()->route('home.index');
+        Auth::login($user);
+        return redirect()->route('login.index');
     }
 
     public function unlockView()

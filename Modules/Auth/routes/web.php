@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Auth\App\Http\Controllers\ActiveEmailController;
-use Modules\Auth\App\Http\Controllers\AuthController;
 use Modules\Auth\App\Http\Controllers\LoginController;
 use Modules\Auth\App\Http\Controllers\RegisterController;
 

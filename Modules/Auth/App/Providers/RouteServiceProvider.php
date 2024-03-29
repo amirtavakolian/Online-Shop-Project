@@ -20,6 +20,9 @@ class RouteServiceProvider extends ServiceProvider
     public function boot(): void
     {
         parent::boot();
+
+        Route::middleware('web')
+            ->group(base_path('Modules/Auth/routes/webauthn.php'));
     }
 
     /**
