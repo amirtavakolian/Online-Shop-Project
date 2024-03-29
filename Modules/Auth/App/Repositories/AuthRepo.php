@@ -16,4 +16,11 @@ class AuthRepo implements IAuthRepo
     {
         return User::query()->where('email', $email)->first();
     }
+
+    public function getLockedEmail($email)
+    {
+        return User::query()->where('email', $email)
+            ->where('is_locked', 1)
+            ->first();
+    }
 }

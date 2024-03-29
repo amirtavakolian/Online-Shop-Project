@@ -18,4 +18,10 @@ Route::group(['prefix' => '/auth'], function () {
 
     Route::get('/login', [LoginController::class, 'loginView'])->name('login.index')->middleware('guest');
     Route::post('/login', [LoginController::class, 'login'])->name('login')->middleware('guest');
+
+    Route::get('/unlock', [LoginController::class, 'unlockView'])->name('unlock.index');
+    Route::post('/unlock', [LoginController::class, 'unlock'])->name('unlock');
+
+    Route::get('/unlock/{user:email}', [LoginController::class, 'unlockEmail'])->name('unlock.email');
+
 });
