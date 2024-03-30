@@ -6,4 +6,9 @@ interface IAuthRepo
 {
 
     public function register(array $userCredentials);
+
+    public function findUserByEmail($email);
+
+    public function getLockedEmail($email);
+
 }
