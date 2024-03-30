@@ -13,6 +13,7 @@
             </div>
         </div>
     </div>
+
     <div class="login-register-area pt-50 pb-100" style="direction: rtl;">
         <div class="container">
             <div class="row">
@@ -20,7 +21,7 @@
                     <div class="login-register-wrapper">
                         <div class="login-register-tab-list nav">
                             <a class="active" >
-                                <h4> ورود </h4>
+                                <h4> فراموشی رمز عبور </h4>
                             </a>
                         </div>
                         <div class="tab-content">
@@ -28,17 +29,11 @@
                                 <div class="login-form-container">
                                     @include('auth::partials.messages')
                                     <div class="login-register-form">
-                                        <form action="{{ route('login') }}" method="POST">
+                                        <form action="{{ route('password.email') }}" method="POST">
                                             @csrf
                                             <input name="email" placeholder="ایمیل" type="email">
-                                            <input type="password" name="password" placeholder="رمز عبور">
                                             <div class="button-box">
-                                                <button type="submit"  class="btn btn-google btn-block mt-4">وارد شوید</button>
-                                                <a href="{{ route('password.request') }}"  class="btn btn-google btn-block mt-4">فراموشی رمز عبور</a>
-                                                <a href="#" class="btn btn-google btn-block mt-4">
-                                                    <i class="sli sli-social-google"></i>
-                                                    ایجاد اکانت با گوگل
-                                                </a>
+                                                <button type="submit"  class="btn btn-google btn-block mt-4">ارسال ایمیل</button>
                                             </div>
                                         </form>
                                     </div>

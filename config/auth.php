@@ -61,7 +61,7 @@ return [
 
     'providers' => [
         'users' => [
-            'driver' => 'webauthn',
+            'driver' => 'eloquent',
             'model' => \Modules\Auth\App\Models\User::class,
         ],
 

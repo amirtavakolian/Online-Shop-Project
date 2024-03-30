@@ -45,8 +45,10 @@ class LoginController extends Controller
             if (Redis::get($user->email . '_attempts') == 5) {
                 $user->is_locked = 1;
             }
+            return redirect()->back()->with('failed', 'ایمیل یا پسورد وارد شده اشتباه است');
         }
         Auth::login($user);
+        Redis::del($user->email . '_attempts');
         return redirect()->route('login.index');
     }
 
