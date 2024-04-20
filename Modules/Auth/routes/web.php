@@ -6,18 +6,20 @@ use Modules\Auth\App\Http\Controllers\ForgetPasswordController;
 use Modules\Auth\App\Http\Controllers\LoginController;
 use Modules\Auth\App\Http\Controllers\LoginViaLinkController;
 use Modules\Auth\App\Http\Controllers\RegisterController;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Password;
 
 Route::group(['prefix' => '/auth'], function () {
 
     Route::get('/register', [RegisterController::class, 'registerView'])
         ->name('register.index')->middleware('guest');
 
-    Route::post('/register', [RegisterController::class, 'register'])->name('register');
+    Route::post('/register', [RegisterController::class, 'register'])->name('register')->middleware('guest');
 
-    Route::get('/active-email/{user:email}', ActiveEmailController::class)
-        ->name('email.active')->middleware('auth');
+    Route::get('/active-email', [ActiveEmailController::class, 'index'])
+        ->name('email.active.index')->middleware('auth');
+    Route::post('/active-email/{user:email}/send', [ActiveEmailController::class, 'sendVerificationEmail'])
+        ->name('email.active.send')->middleware('auth');
+    Route::get('/active-email/{user:email}/verify', [ActiveEmailController::class, 'verify'])
+        ->name('email.active.verify')->middleware('auth');
 
     Route::get('/login', [LoginController::class, 'loginView'])->name('login.index')->middleware('guest');
     Route::post('/login', [LoginController::class, 'login'])->name('login')->middleware('guest');

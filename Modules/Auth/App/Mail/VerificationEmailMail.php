@@ -8,13 +8,14 @@ use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\URL;
 
 class VerificationEmailMail extends Mailable
 {
     use Queueable, SerializesModels;
 
 
-    public function __construct(public string $url)
+    public function __construct(private string $email)
     {
         //
     }
@@ -34,8 +35,10 @@ class VerificationEmailMail extends Mailable
      */
     public function content(): Content
     {
+        $url = $this->generateLink();
         return new Content(
             view: 'auth::mail.verification-mail',
+            with: ['url' => $url ]
         );
     }
 
@@ -47,5 +50,12 @@ class VerificationEmailMail extends Mailable
     public function attachments(): array
     {
         return [];
+    }
+
+    public function generateLink()
+    {
+        return URL::temporarySignedRoute(
+            'email.active.verify', now()->addMinutes(10), ['user' => $this->email]
+        );
     }
 }

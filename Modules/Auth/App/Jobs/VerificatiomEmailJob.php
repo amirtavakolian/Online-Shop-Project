@@ -24,9 +24,6 @@ class VerificatiomEmailJob implements ShouldQueue
 
     public function handle(): void
     {
-        $url = URL::temporarySignedRoute(
-            'email.active', now()->addMinutes(10), ['user' => $this->user->email]
-        );
-        Mail::to($this->user->email)->send(new VerificationEmailMail($url));
+         Mail::to($this->user->email)->send(new VerificationEmailMail($this->user->email));
     }
 }
