@@ -49,7 +49,7 @@ class LoginController extends Controller
         }
         Auth::login($user);
         Redis::del($user->email . '_attempts');
-        return redirect()->route('login.index');
+        return redirect()->route('home.index');
     }
 
     public function unlockView()
