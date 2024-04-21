@@ -6,5 +6,6 @@
     "Product": true,
     "Brand": true,
     "Banner": true,
-    "Auth": true
+    "Auth": true,
+    "Home": true
 }

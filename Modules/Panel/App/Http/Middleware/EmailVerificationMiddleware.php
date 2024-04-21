@@ -17,9 +17,7 @@ class EmailVerificationMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if (auth()->user()->email_verified_at == null) {
-            if (!Session::has('success')) {
-                Session::flash('verify_email', 'لطفا ایمیل خود را تایید کنید ' . "<a href='" . route('email.active.index') . "'>اینجا کلیک کنید</a>");
-            }
+            Session::flash('verify_email', 'لطفا ایمیل خود را تایید کنید ' . "<a href='" . route('email.active.index') . "'>اینجا کلیک کنید</a>");
         }
 
         return $next($request);
