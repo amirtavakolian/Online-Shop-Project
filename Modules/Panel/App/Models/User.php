@@ -1,13 +1,13 @@
 <?php
 
-namespace Modules\Auth\App\Models;
+namespace Modules\Panel\App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Modules\Auth\Database\Factories\UserFactory;
+use Modules\Panel\Database\Factories\UserFactory;
 
 class User extends Authenticatable
 {
