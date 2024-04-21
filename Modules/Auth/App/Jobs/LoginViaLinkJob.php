@@ -24,8 +24,6 @@ class LoginViaLinkJob implements ShouldQueue
 
     public function handle(): void
     {
-        $url = URL::temporarySignedRoute(
-            'login.link', now()->addMinutes(10), ['email' => $this->user->email]);
-        Mail::to($this->user->email)->send(new LoginViaLinkMail($url));
+        Mail::to($this->user->email)->send(new LoginViaLinkMail($this->user));
     }
 }
