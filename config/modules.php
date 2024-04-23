@@ -117,7 +117,7 @@ return [
             'assets' => ['path' => 'resources/assets', 'generate' => false],
             'lang' => ['path' => 'lang', 'generate' => false],
             'views' => ['path' => 'resources/views', 'generate' => true],
-            'test' => ['path' => 'tests/Unit', 'generate' => false],
+            'test' => ['path' => 'tests/Unit', 'generate' => true],
             'test-feature' => ['path' => 'tests/Feature', 'generate' => false],
             'repository' => ['path' => 'App/Repositories', 'generate' => true],
             'event' => ['path' => 'App/Events', 'generate' => false],

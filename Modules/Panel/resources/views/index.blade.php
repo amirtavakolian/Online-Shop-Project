@@ -1,8 +1,16 @@
 @extends('panel::layouts.master')
 
 @section('content')
+    @if(session()->has('verify_email'))
+        <div class="alert alert-danger">
+            {!!  session('verify_email') !!}
+        </div>
+    @endif
 
     @section('page-title', 'داشبورد')
+
+    @include('panel::partials.messages')
+
     <!-- Content Row -->
     <div class="row">
         <!-- Earnings (Monthly) Card Example -->

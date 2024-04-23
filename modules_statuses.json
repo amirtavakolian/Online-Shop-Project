@@ -5,5 +5,7 @@
     "Tags": true,
     "Product": true,
     "Brand": true,
-    "Banner": true
+    "Banner": true,
+    "Auth": true,
+    "Home": true
 }
