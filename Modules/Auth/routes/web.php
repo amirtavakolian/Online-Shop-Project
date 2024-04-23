@@ -7,6 +7,7 @@ use Modules\Auth\App\Http\Controllers\LoginController;
 use Modules\Auth\App\Http\Controllers\LoginViaLinkController;
 use Modules\Auth\App\Http\Controllers\MagicLoginController;
 use Modules\Auth\App\Http\Controllers\RegisterController;
+use Modules\Auth\App\Http\Controllers\TwoFactorController;
 
 Route::group(['prefix' => '/auth'], function () {
 
@@ -43,6 +44,15 @@ Route::group(['prefix' => '/auth'], function () {
         Route::get('/', [MagicLoginController::class, 'index'])->name('magic.link.index');
         Route::post('/generateToken', [MagicLoginController::class, 'sendMagicLoginLink'])->name('magic.link.generate.token');
         Route::get('/authenticate', [MagicLoginController::class, 'authenticate'])->name('login.link.authenticate');
+    });
+
+    Route::prefix('/2fa')->middleware(['auth'])->group(function () {
+        Route::get('/', [TwoFactorController::class, 'index'])->name('two-auth.index');
+        Route::post('/check', [TwoFactorController::class, 'checkTwoAuthCode'])->name('two-auth.check');
+        Route::get("/toggle", [TwoFactorController::class, 'toggleView'])->name('two-auth.toggle.view');
+        Route::post('/toggle', [TwoFactorController::class, 'toggle'])->name('two-auth.toggle');
+        Route::get('/active', [TwoFactorController::class, 'activeView'])->name('two-auth.active.view');
+        Route::post('/active', [TwoFactorController::class, 'active'])->name('two-auth.active');
     });
 
 });

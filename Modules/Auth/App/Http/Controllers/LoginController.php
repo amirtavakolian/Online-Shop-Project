@@ -48,6 +48,9 @@ class LoginController extends Controller
             return redirect()->back()->with('failed', 'ایمیل یا پسورد وارد شده اشتباه است');
         }
         Auth::login($user);
+        if ($user->two_auth == 1) {
+            return redirect()->route('two-auth.index');
+        }
         Redis::del($user->email . '_attempts');
         return redirect()->route('home.index');
     }

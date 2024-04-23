@@ -13,6 +13,9 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    const ACTIVE_TWO_AUTH = 1;
+    const DEACTIVE_TWO_AUTH = 0;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -47,5 +50,17 @@ class User extends Authenticatable
     protected static function newFactory()
     {
         return UserFactory::new();
+    }
+
+    public function deactiveTwoFactorAuth()
+    {
+        $this->two_auth = self::DEACTIVE_TWO_AUTH;
+        $this->save();
+    }
+
+    public function activeTwoFactorAuth()
+    {
+        $this->two_auth = self::ACTIVE_TWO_AUTH;
+        $this->save();
     }
 }
