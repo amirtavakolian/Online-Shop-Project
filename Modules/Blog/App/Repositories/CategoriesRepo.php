@@ -15,4 +15,14 @@ class CategoriesRepo implements iCategoriesRepo
     {
         Category::query()->create($categoryData);
     }
+
+    public function update(array $categoryData, Category $category)
+    {
+        $category->update($categoryData);
+    }
+
+    public function delete(Category $category)
+    {
+        $category->delete();
+    }
 }

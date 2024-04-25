@@ -24,8 +24,8 @@
                                     <tr>
                                         <td>{{ $category->name }}</td>
                                         <td>
-                                            <a href="#">ویرایش</a>
-                                            <a href="#">حذف</a>
+                                            <a href="{{ route('blog.categories.edit', ['category' => $category->id]) }}">ویرایش</a>
+                                            <a href="#" data-category-id="{{ $category->id }}">حذف</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -60,11 +60,11 @@
     <script>
         const table = document.getElementsByTagName('table');
         table[0].addEventListener('click', function (e) {
-            if (e.target.hasAttribute('data-tag-id')) {
+            if (e.target.hasAttribute('data-category-id')) {
                 e.preventDefault();
                 if (confirm('آیا مطمئن هستید؟')) {
-                    let route = `{{ route('blog.tags.destroy', ['tag' => ':tag']) }}`
-                    route = route.replace(':tag', e.target.attributes[1].nodeValue);
+                    let route = `{{ route('blog.categories.destroy', ['category' => ':category']) }}`
+                    route = route.replace(':category', e.target.attributes[1].nodeValue);
 
                     const token = document.querySelector('meta[name="csrf-token"]').content;
                     const xhr = new XMLHttpRequest();
