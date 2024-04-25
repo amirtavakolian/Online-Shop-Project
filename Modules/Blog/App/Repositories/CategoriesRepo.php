@@ -10,4 +10,9 @@ class CategoriesRepo implements iCategoriesRepo
     {
         return Category::all();
     }
+
+    public function store(array $categoryData)
+    {
+        Category::query()->create($categoryData);
+    }
 }

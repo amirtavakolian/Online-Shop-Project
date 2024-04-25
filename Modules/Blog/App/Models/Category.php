@@ -10,4 +10,5 @@ class Category extends Model
     use HasFactory;
 
     protected $table = 'post_categories';
+    protected $fillable = ['name'];
 }

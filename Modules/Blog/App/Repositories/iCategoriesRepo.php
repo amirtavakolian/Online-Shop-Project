@@ -6,4 +6,6 @@ interface iCategoriesRepo
 {
 
     public function all();
+
+    public function store(array $categoryData);
 }
