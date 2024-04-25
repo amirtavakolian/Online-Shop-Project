@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container-fluid">
+        @include('blog::partials.messages')
         <div class="row">
             <div class="col-sm-6 w-100">
                 <div class="single_post">
@@ -19,7 +20,7 @@
                                     <tr>
                                         <td>{{ $tag->name }}</td>
                                         <td>
-                                            <a href="#">ویرایش</a>
+                                            <a href="{{ route('blog.tags.edit', ['tag' => $tag->id]) }}">ویرایش</a>
                                             <a href="#">حذف</a>
                                         </td>
                                     </tr>
@@ -38,7 +39,6 @@
                         <div class="col-md-12">
                             <div class="post_content text-center">
                                 <div class="form-group">
-                                    @include('blog::partials.messages')
                                     <label for="exampleInputEmail1">عنوان تگ:</label>
                                     <input type="text" name="name" class="form-control ">
                                 </div>

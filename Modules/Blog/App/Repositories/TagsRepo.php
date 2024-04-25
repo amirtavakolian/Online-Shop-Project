@@ -16,4 +16,9 @@ class TagsRepo implements iTagsRepo
     {
         Tag::query()->create($tagData);
     }
+
+    public function update(array $tagData, Tag $tag)
+    {
+        $tag->update($tagData);
+    }
 }
