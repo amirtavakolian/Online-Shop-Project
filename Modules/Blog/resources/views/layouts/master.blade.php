@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="{{ asset('modules/blog/css/owl.carousel.css') }}">
     <link rel="stylesheet" href="{{ asset('modules/blog/css/owl.theme.default.css') }}">
     <link rel="stylesheet" href="{{ asset('modules/blog/css/style.css') }}">
+    @yield('head')
 </head>
 <body>
 <div class="top-bar">

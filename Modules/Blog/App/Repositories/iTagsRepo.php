@@ -11,4 +11,6 @@ interface iTagsRepo
     public function store(array $tagData);
 
     public function update(array $tagData, Tag $tag);
+
+    public function delete(Tag $tag);
 }

@@ -1,5 +1,9 @@
 @extends('blog::layouts.master')
 
+@section('head')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
+
 @section('content')
     <div class="container-fluid">
         @include('blog::partials.messages')
@@ -21,7 +25,7 @@
                                         <td>{{ $tag->name }}</td>
                                         <td>
                                             <a href="{{ route('blog.tags.edit', ['tag' => $tag->id]) }}">ویرایش</a>
-                                            <a href="#">حذف</a>
+                                            <a href="#" data-tag-id="{{ $tag->id }}">حذف</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -51,4 +55,30 @@
             </div>
         </div>
     </div>
+@endsection
+@section('script')
+    <script>
+        const table = document.getElementsByTagName('table');
+        table[0].addEventListener('click', function (e) {
+            if (e.target.hasAttribute('data-tag-id')) {
+                e.preventDefault();
+                if (confirm('آیا مطمئن هستید؟')) {
+                    let route = `{{ route('blog.tags.destroy', ['tag' => ':tag']) }}`
+                    route = route.replace(':tag', e.target.attributes[1].nodeValue);
+
+                    const token = document.querySelector('meta[name="csrf-token"]').content;
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('DELETE', route);
+                    xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                    xhr.send();
+
+                    xhr.addEventListener('load', function (response) {
+                        if (xhr.status == 200) {
+                            window.location.reload();
+                        }
+                    });
+                }
+            }
+        });
+    </script>
 @endsection

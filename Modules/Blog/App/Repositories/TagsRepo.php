@@ -21,4 +21,9 @@ class TagsRepo implements iTagsRepo
     {
         $tag->update($tagData);
     }
+
+    public function delete(Tag $tag)
+    {
+        $tag->delete();
+    }
 }

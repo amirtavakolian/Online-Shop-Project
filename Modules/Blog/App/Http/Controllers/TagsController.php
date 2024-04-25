@@ -38,4 +38,12 @@ class TagsController extends Controller
         return redirect()->route('blog.tags.index')->with('success', 'تگ با موفقیت آپدیت شد');
     }
 
+    public function destroy(Tag $tag)
+    {
+        $this->tagsRepo->delete($tag);
+        return [
+            'status' => 200,
+            'message' => 'تگ با موفقیت حذف شد'
+        ];
+    }
 }
