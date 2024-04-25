@@ -4,6 +4,8 @@ namespace Modules\Blog\App\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Modules\Blog\App\Repositories\CategoriesRepo;
+use Modules\Blog\App\Repositories\iCategoriesRepo;
 use Modules\Blog\App\Repositories\iTagsRepo;
 use Modules\Blog\App\Repositories\TagsRepo;
 
@@ -34,6 +36,9 @@ class BlogServiceProvider extends ServiceProvider
         $this->app->register(RouteServiceProvider::class);
         $this->app->singleton(iTagsRepo::class, function () {
             return new TagsRepo();
+        });
+        $this->app->singleton(iCategoriesRepo::class, function () {
+            return new CategoriesRepo();
         });
     }
 
