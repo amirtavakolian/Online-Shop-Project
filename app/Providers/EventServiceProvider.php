@@ -6,8 +6,9 @@ use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 use LaravelWebauthn\Listeners\LoginViaRemember;
+use Modules\Panel\App\Events\NewUserRegisteredEvent;
+use Modules\Panel\App\Listeners\BroadcastNewUserRegisteredListener;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -23,6 +24,9 @@ class EventServiceProvider extends ServiceProvider
         Login::class => [
             LoginViaRemember::class,
         ],
+        NewUserRegisteredEvent::class => [
+            BroadcastNewUserRegisteredListener::class
+        ]
     ];
 
     /**

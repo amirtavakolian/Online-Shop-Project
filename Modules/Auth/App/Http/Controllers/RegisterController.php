@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Modules\Auth\App\Http\Requests\RegisterUserRequest;
 use Modules\Auth\App\Jobs\VerificatiomEmailJob;
 use Modules\Auth\App\Repositories\IAuthRepo;
+use Modules\Panel\App\Events\NewUserRegisteredEvent;
 
 class RegisterController extends Controller
 {
@@ -25,6 +26,7 @@ class RegisterController extends Controller
         $user = $this->authRepo->register($request->validated());
         Auth::login($user);
         VerificatiomEmailJob::dispatch($user);
+        NewUserRegisteredEvent::dispatch('کاربر جدید ثبت نام شد', $user);
         return redirect()->route('home.index');
     }
 }

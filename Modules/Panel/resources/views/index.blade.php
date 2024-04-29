@@ -8,7 +8,9 @@
     @endif
 
     @section('page-title', 'داشبورد')
-
+    <div class="alert alert-success invisible" id="realtime-notification">
+        یک کاربر جدید ثبت نام کرد
+    </div>
     @include('panel::partials.messages')
 
     <!-- Content Row -->
@@ -340,5 +342,6 @@
 
         </div>
     </div>
-
+    @vite(['resources/js/app.js'])
 @endsection
+
