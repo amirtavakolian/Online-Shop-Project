@@ -9,4 +9,5 @@
     "Auth": true,
     "Home": true,
     "Blog": true
+    "Chat": true
 }
