@@ -6,8 +6,12 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Modules\Blog\App\Repositories\CategoriesRepo;
 use Modules\Blog\App\Repositories\iCategoriesRepo;
+use Modules\Blog\App\Repositories\iPostsRepo;
 use Modules\Blog\App\Repositories\iTagsRepo;
+use Modules\Blog\App\Repositories\PostsRepo;
 use Modules\Blog\App\Repositories\TagsRepo;
+use Modules\Blog\App\Services\FileUploader\FileUploaderBuilder;
+use Modules\Blog\App\Services\FileUploader\FileUploaderService;
 
 class BlogServiceProvider extends ServiceProvider
 {
@@ -39,6 +43,12 @@ class BlogServiceProvider extends ServiceProvider
         });
         $this->app->singleton(iCategoriesRepo::class, function () {
             return new CategoriesRepo();
+        });
+        $this->app->singleton(iPostsRepo::class, function () {
+            return new PostsRepo();
+        });
+        $this->app->singleton(FileUploaderBuilder::class, function ($app) {
+            return new FileUploaderBuilder($app->make(FileUploaderService::class));
         });
     }
 

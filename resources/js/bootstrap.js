@@ -31,14 +31,6 @@ window.Echo1 = new Echo({
     enabledTransports: ['ws', 'wss'],
 });
 
-Echo1.channel('userregistered')
-    .listen('.Modules\\Panel\\App\\Events\\NewUserRegisteredEvent', (e) => {
-        const notification = document.querySelector('#realtime-notification');
-        notification.innerText = e.message;
-        console.log(e.user);
-        var audio = new Audio('https://proxy.notificationsounds.com/message-tones/to-the-point-568/download/file-sounds-1111-to-the-point.mp3');
-        audio.play();
-        notification.classList.remove('invisible')
-    });
+
 
 

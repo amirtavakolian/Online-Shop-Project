@@ -342,6 +342,18 @@
 
         </div>
     </div>
-    @vite(['resources/js/app.js'])
 @endsection
-
+@section('scripts')
+    <script src="{{ asset('modules/panel/js/pusher.js') }}"></script>
+    <script>
+        Echo1.private('userregistered')
+            .listen('.Modules\\Panel\\App\\Events\\NewUserRegisteredEvent', (e) => {
+                const notification = document.querySelector('#realtime-notification');
+                notification.innerText = e.message;
+                console.log(e.user);
+                var audio = new Audio('https://proxy.notificationsounds.com/message-tones/to-the-point-568/download/file-sounds-1111-to-the-point.mp3');
+                audio.play();
+                notification.classList.remove('invisible')
+            });
+    </script>
+@endsection
