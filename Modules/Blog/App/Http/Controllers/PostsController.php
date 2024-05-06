@@ -20,6 +20,12 @@ class PostsController extends Controller
         $this->middleware('auth')->only('create');
     }
 
+    public function index()
+    {
+        $posts = $this->postsRepo->all();
+        return view('blog::posts.index', compact('posts'));
+    }
+
     public function create()
     {
         $posts = $this->postsRepo->all();

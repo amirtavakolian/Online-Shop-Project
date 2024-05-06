@@ -8,7 +8,7 @@ class PostsRepo implements iPostsRepo
 {
     public function all()
     {
-        return Post::all();
+        return Post::with('category')->get();
     }
 
     public function create(array $postCredentials)
