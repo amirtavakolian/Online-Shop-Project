@@ -12,4 +12,6 @@ interface iPostsRepo
     public function create(array $postCredentials);
 
     public function update(Post $post, array $postCredentials);
+
+    public function destroy(Post $post);
 }

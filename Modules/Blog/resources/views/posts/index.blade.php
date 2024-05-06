@@ -10,6 +10,8 @@
             <div class="col-md-12">
                 @include('blog::partials.messages')
                 <div class="post_content text-center">
+                    <a href="{{ route('blog.posts.create') }}" class="btn btn-success">ایجاد پست جدید</a>
+                    <br><br>
                     <table class="table table-bordered" style="text-align: center">
                         <thead>
                         <tr>
@@ -28,6 +30,7 @@
                             <th scope="col">دسته بندی</th>
                             <th scope="col">تاریخ ایجاد پست</th>
                             <th scope="col">عملیات</th>
+                            <th scope="col">حذف</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -50,6 +53,8 @@
                                 <td>{{ $post->category->name }}</td>
                                 <td>{{ $post->created_at }}</td>
                                 <td><a href="{{ route('blog.posts.edit', ['post' => $post->id]) }}">ویرایش</a></td>
+                                <td><a href="{{ route('blog.posts.destroy', ['post' => $post->id]) }}"
+                                       data-post-id="{{ $post->id }}">حذف</a></td>
                             </tr>
                         @endforeach
 
@@ -62,3 +67,28 @@
     </div>
 @endsection
 
+@section('script')
+    <script>
+        let table = document.querySelector("table");
+        table.addEventListener("click", function (e) {
+            if (e.target.hasAttribute('data-post-id')) {
+                if (confirm('آیا مطمئن هستید؟')) {
+                    e.preventDefault();
+                    const token = document.querySelector('meta[name="csrf-token"]').content;
+                    let route = `{{ route('blog.posts.destroy', ['post' => ':post']) }}`;
+                    route = route.replace(':post', e.target.getAttribute('data-post-id'));
+
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('DELETE', route);
+                    xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                    xhr.send();
+
+                    xhr.addEventListener("load", function () {
+                        window.location.reload();
+                    });
+                }
+            }
+        })
+    </script>
+
+@endsection

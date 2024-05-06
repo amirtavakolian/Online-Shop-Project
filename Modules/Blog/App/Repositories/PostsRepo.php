@@ -20,4 +20,10 @@ class PostsRepo implements iPostsRepo
     {
         return $post->update($postCredentials);
     }
+
+    public function destroy(Post $post)
+    {
+        $post->delete($post);
+    }
 }
+

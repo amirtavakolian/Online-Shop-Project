@@ -104,5 +104,14 @@ class PostsController extends Controller
         $this->postsRepo->update($post, $postCredentials);
         return redirect()->route('blog.posts.index')->with('success', 'پست با موفقیت آپدیت شد');
     }
+
+    public function destroy(Post $post)
+    {
+        $this->postsRepo->destroy($post);
+        return response()->json([
+            'status' => 200,
+            'message' => 'ok'
+        ]);
+    }
 }
 

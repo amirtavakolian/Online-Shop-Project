@@ -25,7 +25,7 @@ return new class extends Migration {
             $table->timestamp('published_at')->nullable();
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('related_post_id')->references('id')->on('posts');
+            $table->foreign('related_post_id')->references('id')->on('posts')->nullOnDelete();
             $table->timestamps();
         });
     }
