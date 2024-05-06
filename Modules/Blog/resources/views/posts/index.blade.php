@@ -27,6 +27,7 @@
                             <th scope="col">تاریخ انتشار پست</th>
                             <th scope="col">دسته بندی</th>
                             <th scope="col">تاریخ ایجاد پست</th>
+                            <th scope="col">عملیات</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -48,6 +49,7 @@
                                 <td>{{ $post->published_at ?? 'ندارد'}}</td>
                                 <td>{{ $post->category->name }}</td>
                                 <td>{{ $post->created_at }}</td>
+                                <td><a href="{{ route('blog.posts.edit', ['post' => $post->id]) }}">ویرایش</a></td>
                             </tr>
                         @endforeach
 

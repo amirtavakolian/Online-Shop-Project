@@ -15,4 +15,9 @@ class PostsRepo implements iPostsRepo
     {
         return Post::query()->create($postCredentials);
     }
+
+    public function update(Post $post, array $postCredentials)
+    {
+        return $post->update($postCredentials);
+    }
 }

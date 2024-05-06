@@ -5,7 +5,7 @@ namespace Modules\Blog\App\Http\Requests;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePostRequest extends FormRequest
+class UpdateBlogPostRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -31,13 +31,7 @@ class StorePostRequest extends FormRequest
             "published_at" => "nullable",
             "time_to_read" => "required",
             "disable_comment" => "sometimes|in:on",
-            "image_url" => "required",
             "video_url" => "nullable"
         ];
     }
 }
-
-
-
-
-

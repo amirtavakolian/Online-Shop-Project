@@ -32,4 +32,16 @@ class Post extends Model
     {
         return $this->hasOne(Post::class, 'related_post_id');
     }
+
+    public function getImageNameAttribute()
+    {
+        preg_match("/[^\/]+$/", $this->image_url, $matches);
+        return $matches[0];
+    }
+
+    public function getImageDirectoryAttribute()
+    {
+        preg_match('/^(.+\/)/', $this->image_url, $matches);
+        return $matches[0];
+    }
 }
