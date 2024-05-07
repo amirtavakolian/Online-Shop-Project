@@ -24,7 +24,17 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="exampleInputEmail1">دسته بندی:</label>
+                            <label for="exampleInputEmail1">تگ ها: <a href="{{ route('blog.tags.index') }}" target="_blank">ایجاد تگ
+                                    جدید</a></label>
+                            <select class="form-control " name="tags_id[]" multiple>
+                                @foreach($tags as $tag)
+                                    <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">دسته بندی: <a href="{{ route('blog.categories.index') }}" target="_blank">ایجاد دسته بندی جدید</a> </label>
                             <select class="form-control " name="category_id">
                                 @foreach($categories as $category)
                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -179,7 +189,7 @@
         });
     </script>
     <script>
-        published_at.addEventListener("change", function (){
+        published_at.addEventListener("change", function () {
             published_at_timestamp.value = "";
 
         });

@@ -32,7 +32,9 @@ class StorePostRequest extends FormRequest
             "time_to_read" => "required",
             "disable_comment" => "sometimes|in:on",
             "image_url" => "required",
-            "video_url" => "nullable"
+            "video_url" => "nullable",
+            "tags_id" => "required",
+            "tags_id.*" => "exists:post_tags,id"
         ];
     }
 }

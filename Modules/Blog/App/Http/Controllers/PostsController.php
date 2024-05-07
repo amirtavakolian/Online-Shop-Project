@@ -8,6 +8,7 @@ use Modules\Blog\App\Http\Requests\UpdateBlogPostRequest;
 use Modules\Blog\App\Models\Post;
 use Modules\Blog\App\Repositories\iCategoriesRepo;
 use Modules\Blog\App\Repositories\iPostsRepo;
+use Modules\Blog\App\Repositories\iTagsRepo;
 use Modules\Blog\App\Services\FileUploader\FileUploaderBuilder;
 use Modules\Blog\App\Services\TimestampConverter\TimestampConverterService;
 
@@ -16,6 +17,7 @@ class PostsController extends Controller
     public function __construct(
         private iPostsRepo          $postsRepo,
         private iCategoriesRepo     $categoriesRepo,
+        private iTagsRepo           $tagsRepo,
         private FileUploaderBuilder $fileUploaderBuilder
     )
     {
@@ -25,14 +27,15 @@ class PostsController extends Controller
     public function index()
     {
         $posts = $this->postsRepo->all();
-        return view('blog::posts.index', compact('posts'));
+        return view('blog::panel.posts.index', compact('posts'));
     }
 
     public function create()
     {
         $posts = $this->postsRepo->all();
         $categories = $this->categoriesRepo->all();
-        return view('blog::posts.create', compact('posts', 'categories'));
+        $tags = $this->tagsRepo->all();
+        return view('blog::panel.posts.create', compact('posts', 'categories', 'tags'));
     }
 
     public function store(StorePostRequest $request)
@@ -63,7 +66,8 @@ class PostsController extends Controller
         $postCredentials['published_at'] = !is_null($request->input('published_at')) ?
             TimestampConverterService::convert($request->input('published_at')) : null;
 
-        $this->postsRepo->create($postCredentials);
+        $post = $this->postsRepo->create($postCredentials);
+        $post->tags()->attach($request->tags_id);
         return redirect()->route('blog.posts.index')->with('success', 'پست با موفقیت ایجاد شد');
     }
 
@@ -71,7 +75,7 @@ class PostsController extends Controller
     {
         $posts = $this->postsRepo->all();
         $categories = $this->categoriesRepo->all();
-        return view('blog::posts.edit', compact('post', 'categories', 'posts'));
+        return view('blog::panel.posts.edit', compact('post', 'categories', 'posts'));
     }
 
     public function update(UpdateBlogPostRequest $request, Post $post)

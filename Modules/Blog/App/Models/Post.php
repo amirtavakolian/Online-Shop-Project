@@ -5,6 +5,7 @@ namespace Modules\Blog\App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Modules\Panel\App\Models\User;
 
@@ -43,5 +44,10 @@ class Post extends Model
     {
         preg_match('/^(.+\/)/', $this->image_url, $matches);
         return $matches[0];
+    }
+
+    public function tags(): BelongsToMany
+    {
+        return $this->belongsToMany(Tag::class);
     }
 }
