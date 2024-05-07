@@ -2,6 +2,7 @@
 
 namespace Modules\Blog\App\Repositories;
 
+use Carbon\Carbon;
 use Modules\Blog\App\Models\Post;
 
 class PostsRepo implements iPostsRepo
@@ -9,6 +10,14 @@ class PostsRepo implements iPostsRepo
     public function all()
     {
         return Post::with('category')->get();
+    }
+
+    public function postsByPublishedAt()
+    {
+        return Post::where(function ($query) {
+            $query->where('published_at', '<=', Carbon::now())
+                ->orWhereNull('published_at');
+        })->get();
     }
 
     public function create(array $postCredentials)
@@ -25,5 +34,7 @@ class PostsRepo implements iPostsRepo
     {
         $post->delete($post);
     }
+
+
 }
 

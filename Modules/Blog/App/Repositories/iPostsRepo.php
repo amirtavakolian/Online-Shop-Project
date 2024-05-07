@@ -14,4 +14,6 @@ interface iPostsRepo
     public function update(Post $post, array $postCredentials);
 
     public function destroy(Post $post);
+
+    public function postsByPublishedAt();
 }

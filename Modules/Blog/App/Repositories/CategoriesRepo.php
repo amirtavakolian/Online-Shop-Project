@@ -25,4 +25,9 @@ class CategoriesRepo implements iCategoriesRepo
     {
         $category->delete();
     }
+
+    public function countCategoryPosts()
+    {
+        return Category::withCount('posts')->get();
+    }
 }
