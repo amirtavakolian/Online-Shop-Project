@@ -27,10 +27,30 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="exampleInputEmail1">دسته بندی:</label>
+                            <label for="exampleInputEmail1">تگ ها:
+                                <a href="{{ route('blog.tags.index') }}" target="_blank">ایجاد تگ جدید</a>
+                            </label>
+                            <select class="form-control " name="tags_id[]" multiple>
+                                @foreach($tags as $tag)
+                                    <option value="{{ $tag->id }}"
+                                        {{ in_array($tag->id, $post->tags->pluck('id')->toArray()) ? "selected" : "" }}
+                                    >
+                                        {{ $tag->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">دسته بندی:
+                                <a href="{{ route('blog.categories.index') }}" target="_blank">ایجاد دسته بندی جدید</a>
+                            </label>
                             <select class="form-control " name="category_id">
                                 @foreach($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    <option
+                                        value="{{ $category->id }}" {{ $post->category_id == $category->id ? "selected" : "" }}>
+                                        {{ $category->name }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
@@ -89,8 +109,8 @@
 
                         <div class="form-group">
                             <label for="exampleInputEmail1">زمان انتشار پست:</label>
-                            <input type="text" class="form-control" id="published_at">
-                            <input type="hidden" value="{{ $post->published_at }}" name="published_at"
+                            <input type="text" value="{{ $post->published_at }}"  class="form-control" id="published_at">
+                            <input type="hidden" value="" name="published_at"
                                    class="form-control"
                                    id="published_at_timestamp">
                         </div>

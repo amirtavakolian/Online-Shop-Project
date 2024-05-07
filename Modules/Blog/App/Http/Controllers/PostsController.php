@@ -75,7 +75,8 @@ class PostsController extends Controller
     {
         $posts = $this->postsRepo->all();
         $categories = $this->categoriesRepo->all();
-        return view('blog::panel.posts.edit', compact('post', 'categories', 'posts'));
+        $tags = $this->tagsRepo->all();
+        return view('blog::panel.posts.edit', compact('post', 'categories', 'posts', 'tags'));
     }
 
     public function update(UpdateBlogPostRequest $request, Post $post)
@@ -106,6 +107,7 @@ class PostsController extends Controller
         $postCredentials['published_at'] = !is_null($request->input('published_at')) ?
             TimestampConverterService::convert($request->input('published_at')) : null;
         $this->postsRepo->update($post, $postCredentials);
+        $post->tags()->sync($request->tags_id);
         return redirect()->route('blog.posts.index')->with('success', 'پست با موفقیت آپدیت شد');
     }
 
