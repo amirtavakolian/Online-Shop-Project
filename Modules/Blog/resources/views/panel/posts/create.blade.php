@@ -177,7 +177,6 @@
                 alert('فیلد عنوان خالی است');
                 suggestImageButton.innerHTML = '';
             }
-
         })
     </script>
     <script src="{{ asset('modules/blog/js/persian-date.min.js') }}"></script>
@@ -187,6 +186,7 @@
             $("#published_at").pDatepicker({
                 observer: true,
                 format: 'YYYY/MM/DD',
+                initialValue: false,
                 altField: '#published_at_timestamp'
             });
         });

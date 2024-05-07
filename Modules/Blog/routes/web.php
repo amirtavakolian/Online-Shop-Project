@@ -17,4 +17,5 @@ Route::group(['prefix' => 'panel/blog', 'as' => 'blog.'], function () {
 
 Route::group(['prefix' => '/blog'], function () {
     Route::get('/', [BlogController::class, 'index'])->name('blog.index');
+    Route::get('/{post}/show', [BlogController::class, 'show'])->name('blog.show');
 });

@@ -8,12 +8,13 @@
                 <div class="top-sidebar-r">
                     <span class="title">پست های جدید</span>
                     @foreach($posts->sortByDesc('created_at')->take(4) as $post)
-                        <a href="#">
+                        <a href="{{ route('blog.show', ['post' => $post->id]) }}">
                             <div class="bx">
                                 <div class="col-md-6">
                                     <div class="img-box">
                                         <figure>
-                                            <img style="object-fit: fill" src="{{ asset('storage/'.$post->image_url) }}" alt="">
+                                            <img style="object-fit: fill" src="{{ asset('storage/'.$post->image_url) }}"
+                                                 alt="">
                                             <figcaption><span>1</span></figcaption>
                                         </figure>
                                     </div>
@@ -37,16 +38,18 @@
                     <div class="owl-carousel owl-theme main-slider">
                         @foreach($posts->sortByDesc('created_at')->take(4) as $post)
                             <div class="item">
-                                <figure>
-                                    <img style="object-fit: fill" src="{{ asset('storage/'.$post->image_url) }}" alt="">
-                                    <figcaption class="gradient-fig"></figcaption>
-                                    <figcaption class="desc-fig">
-                                        <span><i class="fa fa-heart"></i> 56</span>
-                                        <h3 style="color: red">{{ $post->title }}</h3>
-                                        <span><i class="fa fa-clock-o"></i>{{ Carbon::parse($post->created_at)->diffForHumans() }}</span>
-
-                                    </figcaption>
-                                </figure>
+                                <a href="{{ route('blog.show', ['post' => $post->id]) }}">
+                                    <figure>
+                                        <img style="object-fit: fill" src="{{ asset('storage/'.$post->image_url) }}"
+                                             alt="">
+                                        <figcaption class="gradient-fig"></figcaption>
+                                        <figcaption class="desc-fig">
+                                            <span><i class="fa fa-heart"></i> 56</span>
+                                            <h3 style="color: red">{{ $post->title }}</h3>
+                                            <span><i class="fa fa-clock-o"></i>{{ Carbon::parse($post->created_at)->diffForHumans() }}</span>
+                                        </figcaption>
+                                    </figure>
+                                </a>
                             </div>
                         @endforeach
                     </div>
@@ -135,9 +138,10 @@
                             <div class="col-md-8">
                                 <div class="main-post">
                                     @foreach($posts->sortByDesc('view')->take(1) as $post)
-                                        <a href="#">
+                                        <a href="{{ route('blog.show', ['post' => $post->id]) }}">
                                             <figure>
-                                                <img style="object-fit: fill" src="{{ asset('storage/'.$post->image_url) }}" alt="">
+                                                <img style="object-fit: fill"
+                                                     src="{{ asset('storage/'.$post->image_url) }}" alt="">
                                                 <figcaption>
                                                     <h3>{{ $post->title }}</h3>
                                                     <span><i class="fa fa-comments-o"></i> 65</span>
@@ -158,7 +162,7 @@
                                             @foreach($post->tags as $tag)
                                                 <span class="cat-span">{{ $tag->name }}</span>
                                             @endforeach
-                                            <a href="#">
+                                            <a href="{{ route('blog.show', ['post' => $post->id]) }}">
                                                 <h5>{{ $post->title }}</h5>
                                             </a>
                                             <span><i class="fa fa-clock-o"></i>{{ $post->created_at }}</span>
@@ -193,7 +197,7 @@
                 @foreach($posts->sortByDesc('created_at')->take(8) as $post)
                     <div class="col-md-3">
                         <div class="post-box">
-                            <a href="#">
+                            <a href="{{ route('blog.show', ['post' => $post->id]) }}">
                                 <figure>
                                     <img style="object-fit: fill" src="{{ asset('storage/'.$post->image_url) }}" alt="">
                                     <figcaption class="meta-fig">
@@ -212,7 +216,7 @@
                                         {{ $post->content }}
                                     </p>
                                     <div class="text-rigt">
-                                        <a href="#">ادامه ...</a></div>
+                                        <a href="{{ route('blog.show', ['post' => $post->id]) }}">ادامه ...</a></div>
                                 </div>
                             </a>
                         </div>
