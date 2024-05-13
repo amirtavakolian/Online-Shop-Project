@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Modules\Blog\App\Http\Controllers\BlogController;
 use Modules\Blog\App\Http\Controllers\CategoriesController;
 use Modules\Blog\App\Http\Controllers\PostCalculateController;
+use Modules\Blog\App\Http\Controllers\PostsCommentController;
 use Modules\Blog\App\Http\Controllers\PostsController;
 use Modules\Blog\App\Http\Controllers\TagsController;
 
@@ -13,6 +14,8 @@ Route::group(['prefix' => 'panel/blog', 'as' => 'blog.'], function () {
     Route::resource('/posts', PostsController::class);
 
     Route::post('/posts/calculate', PostCalculateController::class)->name('post.text.calculate');
+
+    Route::post('/posts/{post}/comment/store', [PostsCommentController::class, 'store'])->name('post.comment.store');
 });
 
 Route::group(['prefix' => '/blog'], function () {

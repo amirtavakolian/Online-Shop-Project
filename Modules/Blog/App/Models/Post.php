@@ -50,4 +50,14 @@ class Post extends Model
     {
         return $this->belongsToMany(Tag::class);
     }
+
+    public function comments()
+    {
+        return $this->hasMany(PostComment::class);
+    }
+
+    public function approvedParentComments()
+    {
+        return $this->comments->whereNull('parent_id')->where('status', 1);
+    }
 }

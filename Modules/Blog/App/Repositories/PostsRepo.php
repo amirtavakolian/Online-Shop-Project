@@ -9,7 +9,7 @@ class PostsRepo implements iPostsRepo
 {
     public function all()
     {
-        return Post::with('category')->get();
+        return Post::with('category')->with('comments')->get();
     }
 
     public function postsByPublishedAt()

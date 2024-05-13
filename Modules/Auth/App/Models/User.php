@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Modules\Auth\Database\Factories\UserFactory;
+use Modules\Blog\App\Models\PostComment;
 
 class User extends Authenticatable
 {
@@ -62,5 +63,10 @@ class User extends Authenticatable
     {
         $this->two_auth = self::ACTIVE_TWO_AUTH;
         $this->save();
+    }
+
+    public function postComment()
+    {
+        return $this->hasMany(PostComment::class);
     }
 }
