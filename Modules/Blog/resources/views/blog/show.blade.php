@@ -1,3 +1,4 @@
+@php use Carbon\Carbon; @endphp
 @extends('blog::layouts.master')
 
 @section('head')
@@ -241,37 +242,38 @@
 
                                 <!-- Comment 1 start -->
                                 <details open class="comment" id="comment-{{ $comment->id }}">
-                                        <a href="#comment-{{ $comment->id }}" class="comment-border-link">
-                                            <span class="sr-only">Jump to comment-1</span>
-                                        </a>
-                                        <input type="hidden" name="comment_id" value="{{ $comment->id }}">
-                                        <summary>
-                                            <div class="comment-heading">
-                                                <div class="comment-voting">
-                                                    <button type="button">
-                                                        <span aria-hidden="true">&#9650;</span>
-                                                        <span class="sr-only">Vote up</span>
-                                                    </button>
-                                                    <button type="button">
-                                                        <span aria-hidden="true">&#9660;</span>
-                                                        <span class="sr-only">Vote down</span>
-                                                    </button>
-                                                </div>
-                                                <div class="comment-info">
-                                                    <a href="#" class="comment-author">{{ $comment->user->name }}</a>
-                                                    <p class="m-0">
-                                                        22 points &bull; {{ \Carbon\Carbon::parse($comment->created_at)->diffForHumans() }}
-                                                    </p>
-                                                </div>
+                                    <a href="#comment-{{ $comment->id }}" class="comment-border-link">
+                                        <span class="sr-only">Jump to comment-1</span>
+                                    </a>
+                                    <input type="hidden" name="comment_id" value="{{ $comment->id }}">
+                                    <summary>
+                                        <div class="comment-heading">
+                                            <div class="comment-voting">
+                                                <button type="button">
+                                                    <span aria-hidden="true">&#9650;</span>
+                                                    <span class="sr-only">Vote up</span>
+                                                </button>
+                                                <button type="button">
+                                                    <span aria-hidden="true">&#9660;</span>
+                                                    <span class="sr-only">Vote down</span>
+                                                </button>
                                             </div>
-                                        </summary>
-
-                                        <div class="comment-body">
-                                            <p>
-                                                {{ $comment->content }}
-                                            </p>
-                                            <!-- Reply form end -->
+                                            <div class="comment-info">
+                                                <a href="#" class="comment-author">{{ $comment->user->name }}</a>
+                                                <p class="m-0">
+                                                    22 points
+                                                    &bull; {{ Carbon::parse($comment->created_at)->diffForHumans() }}
+                                                </p>
+                                            </div>
                                         </div>
+                                    </summary>
+
+                                    <div class="comment-body">
+                                        <p>
+                                            {{ $comment->content }}
+                                        </p>
+                                        <!-- Reply form end -->
+                                    </div>
                                     <!-- replies here: -->
                                     <div class="replies">
                                         @foreach($comment->replies as $reply)
@@ -293,9 +295,11 @@
                                                                 </button>
                                                             </div>
                                                             <div class="comment-info">
-                                                                <a href="#" class="comment-author">{{ $reply->user->name }}</a>
+                                                                <a href="#"
+                                                                   class="comment-author">{{ $reply->user->name }}</a>
                                                                 <p class="m-0">
-                                                                    4 points &bull; {{ \Carbon\Carbon::parse($reply->created_at)->diffForHumans() }}
+                                                                    4 points
+                                                                    &bull; {{ Carbon::parse($reply->created_at)->diffForHumans() }}
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -312,18 +316,22 @@
                                         @endforeach
                                     </div>
                                     <div class="reply">
-                                        <button type="button" data-toggle="reply-form" data-target="comment-{{ $comment->id }}-reply-form">
+                                        <button type="button" data-toggle="reply-form"
+                                                data-target="comment-{{ $comment->id }}-reply-form">
                                             پاسخ
                                         </button>
                                         <button type="button">گزارش تخلف</button>
 
                                         <!-- Reply form start -->
-                                        <form action="#" class="reply-form d-none" id="comment-{{ $comment->id }}-reply-form">
-                                                <textarea placeholder="Reply to comment" rows="4"></textarea>
-                                                <button type="submit">ثبت</button>
-                                                <button type="button" data-toggle="reply-form" data-target="comment-{{ $comment->id }}-reply-form">
-                                                    کنسل
-                                                </button>
+                                        <form action="#" class="reply-form d-none"
+                                              id="comment-{{ $comment->id }}-reply-form">
+                                            <textarea placeholder="Reply to comment" rows="4"></textarea>
+                                            <button type="submit" data-parent-comment-id="{{ $comment->id }}">ثبت
+                                            </button>
+                                            <button type="button" data-toggle="reply-form"
+                                                    data-target="comment-{{ $comment->id }}-reply-form">
+                                                کنسل
+                                            </button>
                                         </form>
                                     </div>
                                     <hr style="border: 2px solid aqua">
@@ -383,12 +391,14 @@
         );
 
         const reply = document.querySelector(".comments_form");
-        reply.addEventListener('click', function (e){
-            if(e.target.getAttribute('type') == 'submit'){
+        reply.addEventListener('click', function (e) {
+            if (e.target.getAttribute('type') == 'submit') {
                 e.preventDefault();
+
                 const token = document.querySelector('meta[name="csrf-token"]').content;
-                let route = `{{ route('blog.post.comment.reply.store', ['post' => $post->id , 'comment' => ':comment']) }}`;
+                let route = `{{ route('blog.post.comment.reply.store', ['post' => $post->id, 'postComment'=> ':postComment']) }}`;
                 route = route.replace(':comment', e.target.parentNode.parentNode.parentNode.children[1].value)
+                route = route.replace(':postComment', e.target.attributes[1].value)
 
                 const replyData = new FormData();
                 replyData.append('content', e.target.parentNode[0].value)
@@ -398,8 +408,8 @@
                 xhrStoreReply.setRequestHeader('X-CSRF-TOKEN', token);
                 xhrStoreReply.send(replyData)
 
-                xhrStoreReply.addEventListener('load', function (response){
-                    if(xhrStoreReply.status == 200){
+                xhrStoreReply.addEventListener('load', function (response) {
+                    if (xhrStoreReply.status == 200) {
                         alert('کامنت شما پس از تایید مدیر نشان داده خواهد شد');
                         e.target.parentNode[0].value = "";
                     }

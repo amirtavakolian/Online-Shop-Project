@@ -5,7 +5,9 @@ namespace Modules\Blog\App\Providers;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Modules\Blog\App\Repositories\CategoriesRepo;
+use Modules\Blog\App\Repositories\CommentsRepo;
 use Modules\Blog\App\Repositories\iCategoriesRepo;
+use Modules\Blog\App\Repositories\iCommentsRepo;
 use Modules\Blog\App\Repositories\iPostCommentRepo;
 use Modules\Blog\App\Repositories\iPostsRepo;
 use Modules\Blog\App\Repositories\iTagsRepo;
@@ -55,7 +57,9 @@ class BlogServiceProvider extends ServiceProvider
         $this->app->singleton(iPostCommentRepo::class, function ($app) {
             return new PostCommentRepo();
         });
-
+        $this->app->singleton(iCommentsRepo::class, function ($app) {
+            return new CommentsRepo();
+        });
     }
 
     /**

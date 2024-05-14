@@ -23,12 +23,12 @@ class PostsCommentController extends Controller
         return redirect()->back()->with('success', 'کامنت شما پس از تایید ادمین؛ نمایش داده خواهد شد');
     }
 
-    public function storeCommentReply(Post $post, PostComment $comment, Request $request)
+    public function storeCommentReply(Post $post, PostComment $postComment, Request $request)
     {
         $post->comments()->create([
             "user_id" => auth()->user()->id,
             "content" => $request->input('content'),
-            "parent_id" => $comment->id
+            "parent_id" => $postComment->id
         ]);
         return response()->json([
             'message' => 'ok',

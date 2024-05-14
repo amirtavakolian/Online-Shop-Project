@@ -10,7 +10,7 @@ class PostComment extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['post_id', 'user_id', 'content', 'parent_id'];
+    protected $fillable = ['post_id', 'user_id', 'content', 'parent_id', 'status'];
 
     protected $table = 'posts_comments';
 
@@ -22,7 +22,7 @@ class PostComment extends Model
     public function replies()
     {
         return $this->hasMany(PostComment::class, 'parent_id')
-                ->orderBy('created_at');
+            ->orderBy('created_at');
     }
 
     public function user()
@@ -33,5 +33,18 @@ class PostComment extends Model
     public function approvedComments()
     {
         return $this->status == 1;
+    }
+
+    public function getCommentStatusAttribute()
+    {
+        if ($this->status == 0) {
+            return 'در انتظار تایید';
+        }
+        if ($this->status == 1) {
+            return 'تایید شده';
+        }
+        if ($this->status == 2) {
+            return 'رد شده';
+        }
     }
 }
