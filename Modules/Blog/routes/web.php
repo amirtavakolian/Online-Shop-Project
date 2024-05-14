@@ -21,6 +21,8 @@ Route::group(['prefix' => 'panel/blog', 'as' => 'blog.'], function () {
 Route::group(['prefix' => '/blog', 'as' => 'blog.'], function () {
     Route::post('/posts/{post}/comment/store', [PostsCommentController::class, 'store'])->name('post.comment.store');
     Route::post('/posts/{post}/{postComment}/reply/store', [PostsCommentController::class, 'storeCommentReply'])->name('post.comment.reply.store');
+    Route::post('/posts/{postComment}/like', [CommentsController::class, 'likeReply'])->name('post.comment.like');
+    Route::post('/posts/{postComment}/disslike', [CommentsController::class, 'disslikeReply'])->name('post.comment.disslike');
 });
 
 Route::group(['prefix' => '/blog'], function () {

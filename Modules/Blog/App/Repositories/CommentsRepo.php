@@ -18,4 +18,19 @@ class CommentsRepo implements iCommentsRepo
             'status' => $status
         ]);
     }
+
+    public function increaseLike(PostComment $comment)
+    {
+        $comment->update([
+            'like' => $comment->like + 1
+        ]);
+    }
+
+    public function increaseDisslike(PostComment $comment)
+    {
+        $comment->update([
+            'dislike' => $comment->dislike + 1
+        ]);
+    }
 }
+

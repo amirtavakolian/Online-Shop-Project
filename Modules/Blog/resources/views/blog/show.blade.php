@@ -235,7 +235,7 @@
                         <p>ثبت کامنت غیر فعال است</p>
                     </div>
                 @else
-                    <div class="comments_form">
+                    <div class="comments_form" id="comments_form">
                         <h3>دیدگاه ها </h3>
                         @foreach($post->approvedParentComments() as $comment)
                             <div class="comment-thread">
@@ -251,17 +251,21 @@
                                             <div class="comment-voting">
                                                 <button type="button">
                                                     <span aria-hidden="true">&#9650;</span>
-                                                    <span class="sr-only">Vote up</span>
+                                                    <span class="sr-only" data-comment-id-like="{{ $comment->id }}">
+                                                        Vote up
+                                                    </span>
                                                 </button>
                                                 <button type="button">
                                                     <span aria-hidden="true">&#9660;</span>
-                                                    <span class="sr-only">Vote down</span>
+                                                    <span class="sr-only" data-comment-id-disslike="{{ $comment->id }}">
+                                                        Vote down
+                                                    </span>
                                                 </button>
                                             </div>
                                             <div class="comment-info">
                                                 <a href="#" class="comment-author">{{ $comment->user->name }}</a>
                                                 <p class="m-0">
-                                                    22 points
+                                                    لایک: {{ $comment->like }} | دیسلایک: {{ $comment->dislike }}
                                                     &bull; {{ Carbon::parse($comment->created_at)->diffForHumans() }}
                                                 </p>
                                             </div>
@@ -287,18 +291,24 @@
                                                             <div class="comment-voting">
                                                                 <button type="button">
                                                                     <span aria-hidden="true">&#9650;</span>
-                                                                    <span class="sr-only">Vote up</span>
+                                                                    <span class="sr-only"
+                                                                          data-comment-id-like="{{ $reply->id }}">
+                                                                        Vote up
+                                                                    </span>
                                                                 </button>
                                                                 <button type="button">
                                                                     <span aria-hidden="true">&#9660;</span>
-                                                                    <span class="sr-only">Vote down</span>
+                                                                    <span class="sr-only"
+                                                                          data-comment-id-disslike="{{ $reply->id }}">
+                                                                        Vote down
+                                                                    </span>
                                                                 </button>
                                                             </div>
                                                             <div class="comment-info">
                                                                 <a href="#"
                                                                    class="comment-author">{{ $reply->user->name }}</a>
                                                                 <p class="m-0">
-                                                                    4 points
+                                                                    لایک: {{ $reply->like }} | دیسلایک: {{ $reply->dislike }}
                                                                     &bull; {{ Carbon::parse($reply->created_at)->diffForHumans() }}
                                                                 </p>
                                                             </div>
@@ -416,5 +426,38 @@
                 })
             }
         });
+
+        const commentsForm = document.querySelector("#comments_form");
+        commentsForm.addEventListener('click', function (e) {
+            if (e.target.nextElementSibling.hasAttribute('data-comment-id-like')) {
+                const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+                let route = `{{ route('blog.post.comment.like', ['postComment' => ':postComment']) }}`
+                route = route.replace(':postComment', e.target.nextElementSibling.attributes[1].value)
+                fetch(route, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': csrfToken
+                    }
+                }).then((response) => {
+                    console.log(response);
+                });
+            }
+            if (e.target.nextElementSibling.hasAttribute('data-comment-id-disslike')) {
+                let route = `{{ route('blog.post.comment.disslike', ['postComment' => ':postComment']) }}`
+                route = route.replace(':postComment', e.target.nextElementSibling.attributes[1].value)
+                const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+
+                fetch(route, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': csrfToken
+                    }
+                }).then((response) => {
+                    console.log(response);
+                });
+            }
+        })
     </script>
 @endsection

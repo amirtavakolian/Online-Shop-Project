@@ -27,4 +27,22 @@ class CommentsController extends Controller
             'status' => '200'
         ]);
     }
+
+    public function likeReply(PostComment $postComment)
+    {
+        $this->commentsRepo->increaseLike($postComment);
+        return response()->json([
+            'message' => 'ok',
+            'status' => 200
+        ]);
+    }
+
+    public function disslikeReply(PostComment $postComment)
+    {
+        $this->commentsRepo->increaseDisslike($postComment);
+        return response()->json([
+            'message' => 'ok',
+            'status' => 200
+        ]);
+    }
 }
