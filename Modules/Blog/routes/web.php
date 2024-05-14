@@ -12,10 +12,12 @@ Route::group(['prefix' => 'panel/blog', 'as' => 'blog.'], function () {
     Route::resource('tags', TagsController::class)->except(['create']);
     Route::resource('categories', CategoriesController::class)->except(['create']);
     Route::resource('/posts', PostsController::class);
-
     Route::post('/posts/calculate', PostCalculateController::class)->name('post.text.calculate');
+});
 
+Route::group(['prefix' => '/blog', 'as' => 'blog.'], function () {
     Route::post('/posts/{post}/comment/store', [PostsCommentController::class, 'store'])->name('post.comment.store');
+    Route::post('/posts/{post}/{comment}/reply/store', [PostsCommentController::class, 'storeCommentReply'])->name('post.comment.reply.store');
 });
 
 Route::group(['prefix' => '/blog'], function () {

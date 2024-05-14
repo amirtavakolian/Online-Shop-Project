@@ -2,14 +2,6 @@
 
 @section('head')
     <style>
-        /*
-            Body, button, comment-thread, and utilities
-
-            Notes:
-                - This section sets some basic styles. You can ignore this part and
-                go directly to the comment styles.
-        */
-
         * {
             box-sizing: border-box;
         }
@@ -210,6 +202,7 @@
             display: none;
         }
     </style>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 @section('content')
     <div class="single_post">
@@ -251,6 +244,7 @@
                                         <a href="#comment-{{ $comment->id }}" class="comment-border-link">
                                             <span class="sr-only">Jump to comment-1</span>
                                         </a>
+                                        <input type="hidden" name="comment_id" value="{{ $comment->id }}">
                                         <summary>
                                             <div class="comment-heading">
                                                 <div class="comment-voting">
@@ -317,19 +311,21 @@
                                             @endif
                                         @endforeach
                                     </div>
-                                    <button type="button" data-toggle="reply-form" data-target="comment-1-reply-form">
-                                        پاسخ
-                                    </button>
-                                    <button type="button">گزارش تخلف</button>
-
-                                    <!-- Reply form start -->
-                                    <form method="POST" class="reply-form d-none" id="comment-1-reply-form">
-                                        <textarea placeholder="Reply to comment" rows="4"></textarea>
-                                        <button type="submit">ثبت</button>
-                                        <button type="button" data-toggle="reply-form" data-target="comment-1-reply-form">
-                                            کنسل
+                                    <div class="reply">
+                                        <button type="button" data-toggle="reply-form" data-target="comment-{{ $comment->id }}-reply-form">
+                                            پاسخ
                                         </button>
-                                    </form>
+                                        <button type="button">گزارش تخلف</button>
+
+                                        <!-- Reply form start -->
+                                        <form action="#" class="reply-form d-none" id="comment-{{ $comment->id }}-reply-form">
+                                                <textarea placeholder="Reply to comment" rows="4"></textarea>
+                                                <button type="submit">ثبت</button>
+                                                <button type="button" data-toggle="reply-form" data-target="comment-{{ $comment->id }}-reply-form">
+                                                    کنسل
+                                                </button>
+                                        </form>
+                                    </div>
                                     <hr style="border: 2px solid aqua">
                                 </details>
                                 <!-- Comment 1 end -->
@@ -385,5 +381,30 @@
             },
             false
         );
+
+        const reply = document.querySelector(".comments_form");
+        reply.addEventListener('click', function (e){
+            if(e.target.getAttribute('type') == 'submit'){
+                e.preventDefault();
+                const token = document.querySelector('meta[name="csrf-token"]').content;
+                let route = `{{ route('blog.post.comment.reply.store', ['post' => $post->id , 'comment' => ':comment']) }}`;
+                route = route.replace(':comment', e.target.parentNode.parentNode.parentNode.children[1].value)
+
+                const replyData = new FormData();
+                replyData.append('content', e.target.parentNode[0].value)
+
+                const xhrStoreReply = new XMLHttpRequest();
+                xhrStoreReply.open('POST', route);
+                xhrStoreReply.setRequestHeader('X-CSRF-TOKEN', token);
+                xhrStoreReply.send(replyData)
+
+                xhrStoreReply.addEventListener('load', function (response){
+                    if(xhrStoreReply.status == 200){
+                        alert('کامنت شما پس از تایید مدیر نشان داده خواهد شد');
+                        e.target.parentNode[0].value = "";
+                    }
+                })
+            }
+        });
     </script>
 @endsection
