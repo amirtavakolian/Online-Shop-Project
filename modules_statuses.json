@@ -9,5 +9,6 @@
     "Auth": true,
     "Home": true,
     "Blog": true,
-    "Chat": true
+    "Chat": true,
+    "RolePermission": true
 }
