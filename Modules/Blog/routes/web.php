@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use Modules\Blog\App\Http\Controllers\BlogController;
 use Modules\Blog\App\Http\Controllers\CategoriesController;
@@ -18,7 +19,7 @@ Route::group(['prefix' => 'panel/blog', 'as' => 'blog.'], function () {
     Route::post('/comments/{comment}/{status}/change', [CommentsController::class, 'changeCommentStatus'])->name('comments.status.change');
 });
 
-Route::group(['prefix' => '/blog', 'as' => 'blog.'], function () {
+Route::group(['prefix' => '/blog', 'as' => 'blog.', 'middleware' => 'auth'], function () {
     Route::post('/posts/{post}/comment/store', [PostsCommentController::class, 'store'])->name('post.comment.store');
     Route::post('/posts/{post}/{postComment}/reply/store', [PostsCommentController::class, 'storeCommentReply'])->name('post.comment.reply.store');
     Route::post('/posts/{postComment}/like', [CommentsController::class, 'likeReply'])->name('post.comment.like');
