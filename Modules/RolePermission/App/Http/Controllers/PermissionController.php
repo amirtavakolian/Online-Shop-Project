@@ -9,6 +9,12 @@ use Modules\RolePermission\App\Models\Permission;
 class PermissionController extends Controller
 {
 
+    public function index()
+    {
+        $permissions = Permission::all();
+        return view('rolepermission::permissions.index', compact('permissions'));
+    }
+
     public function create()
     {
         return view('rolepermission::permissions.create');
