@@ -1,17 +1,18 @@
 <?php
 
-namespace Modules\Panel\App\Providers;
+namespace Modules\RolePermission\App\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Modules\Auth\App\Models\User;
+use Modules\Blog\App\Policies\PostPolicy;
 
-class PanelServiceProvider extends ServiceProvider
+class RolePermissionServiceProvider extends ServiceProvider
 {
-    protected string $moduleName = 'Panel';
+    protected string $moduleName = 'RolePermission';
 
-    protected string $moduleNameLower = 'panel';
+    protected string $moduleNameLower = 'rolepermission';
 
     /**
      * Boot the application events.
@@ -25,11 +26,7 @@ class PanelServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/migrations'));
 
-        Gate::define('access-panel', function (User $user) {
-            if(auth()->user()->isAdmin()){
-                return true;
-            }
-        });
+        Gate::define('create', [PostPolicy::class, 'create']);
     }
 
     /**

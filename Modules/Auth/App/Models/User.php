@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Modules\Auth\Database\Factories\UserFactory;
 use Modules\Blog\App\Models\PostComment;
+use Modules\RolePermission\App\Models\Role;
 
 class User extends Authenticatable
 {
@@ -68,5 +69,20 @@ class User extends Authenticatable
     public function postComment()
     {
         return $this->hasMany(PostComment::class);
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    public function isAdmin()
+    {
+        return $this->roles->pluck('name')->contains('admin');
+    }
+
+    public function isWriter()
+    {
+        return $this->roles->pluck('name')->contains('writer');
     }
 }
