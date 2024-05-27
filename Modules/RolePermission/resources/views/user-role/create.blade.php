@@ -31,7 +31,7 @@
                     @endforeach
                 </div>
                 <button class="btn btn-outline-primary mt-5" type="submit">ثبت</button>
-                <a href="{{ route('roles.index') }}" class="btn btn-danger mt-5 mr-3">بازگشت</a>
+                <a href="{{ route('user-roles.index') }}" class="btn btn-danger mt-5 mr-3">بازگشت</a>
             </form>
         </div>
     </div>

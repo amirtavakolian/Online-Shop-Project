@@ -3,14 +3,18 @@
 namespace Modules\RolePermission\App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Modules\RolePermission\App\Http\Requests\StoreRoleRequest;
 use Modules\RolePermission\App\Http\Requests\StoreUserRoleRequest;
-use Modules\RolePermission\App\Models\Permission;
 use Modules\RolePermission\App\Models\Role;
 use Modules\RolePermission\App\Models\User;
 
 class UserRoleController extends Controller
 {
+
+    public function index()
+    {
+        $users = User::all()->load('roles');
+        return view('rolepermission::user-role.index', compact('users'));
+    }
 
     public function create()
     {
