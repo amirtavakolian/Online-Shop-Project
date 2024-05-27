@@ -26,6 +26,7 @@
                     <tr>
                         <th>#</th>
                         <th>نام</th>
+                        <th>ایمیل</th>
                         <th>نقش کاربری</th>
                         <th>عملیات</th>
                     </tr>
@@ -39,7 +40,9 @@
                             <th>
                                 {{ $user->name }}
                             </th>
-
+                            <th>
+                                {{ $user->email }}
+                            </th>
                             <th style="direction: ltr">
                                 @foreach($user->roles as $role)
                                     <span>{{ $role->name }}</span> -

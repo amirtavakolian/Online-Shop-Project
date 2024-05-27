@@ -3,6 +3,7 @@
 namespace Modules\Blog\App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 use Modules\Blog\App\Http\Requests\StorePostRequest;
 use Modules\Blog\App\Http\Requests\UpdateBlogPostRequest;
 use Modules\Blog\App\Models\Post;
@@ -32,6 +33,7 @@ class PostsController extends Controller
 
     public function create()
     {
+        Gate::authorize('create');
         $posts = $this->postsRepo->all();
         $categories = $this->categoriesRepo->all();
         $tags = $this->tagsRepo->all();
@@ -73,6 +75,7 @@ class PostsController extends Controller
 
     public function edit(Post $post)
     {
+        Gate::authorize('edit', $post);
         $posts = $this->postsRepo->all();
         $categories = $this->categoriesRepo->all();
         $tags = $this->tagsRepo->all();
@@ -81,6 +84,7 @@ class PostsController extends Controller
 
     public function update(UpdateBlogPostRequest $request, Post $post)
     {
+        Gate::authorize('update', $post);
         $postCredentials = $request->validated();
         if ($request->has('image_url')) {
             $uploadedFile = $this->fileUploaderBuilder
@@ -113,6 +117,8 @@ class PostsController extends Controller
 
     public function destroy(Post $post)
     {
+        Gate::authorize('destroy', $post);
+
         $this->postsRepo->destroy($post);
         return response()->json([
             'status' => 200,
