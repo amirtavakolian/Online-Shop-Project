@@ -10,5 +10,6 @@
     "Home": true,
     "Blog": true,
     "Chat": true,
-    "RolePermission": true
+    "RolePermission": true,
+    "Ticket": true
 }
