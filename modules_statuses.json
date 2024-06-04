@@ -11,5 +11,6 @@
     "Blog": true,
     "Chat": true,
     "RolePermission": true,
-    "Ticket": true
+    "Ticket": true,
+    "Coworkers": true
 }

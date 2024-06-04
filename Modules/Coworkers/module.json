@@ -1,0 +1,11 @@
+{
+    "name": "Coworkers",
+    "alias": "coworkers",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Coworkers\\App\\Providers\\CoworkersServiceProvider"
+    ],
+    "files": []
+}
