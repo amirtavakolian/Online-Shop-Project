@@ -18,6 +18,6 @@ class Department extends Model
 
     public function getDepartmentBossAttribute()
     {
-        return $this->boss != null ? $this->boss->name : 'تعیین نشده';
+        return $this->boss_id && $this->boss_id == $this->boss->id ? $this->boss->fullname : 'تعیین نشده';
     }
 }
