@@ -36,11 +36,12 @@
                             <th>
                                 {{ $department->name }}
                             </th>
-                            <th>
-                                {{ $department->departmentBoss }}
+                            <th style="color: {{ $department->departmentBoss[1] }}; font-weight: bolder">
+                                {{ $department->departmentBoss[0] }}
                             </th>
                             <th>
-                                <a class="btn btn-sm btn-success mr-3" href="#">ویرایش</a>
+                                <a class="btn btn-sm btn-success mr-3"
+                                   href="{{ route('departments.edit', $department) }}">ویرایش</a>
                                 <a class="btn btn-sm btn-danger mr-3" href="#">حذف</a>
                             </th>
                         </tr>

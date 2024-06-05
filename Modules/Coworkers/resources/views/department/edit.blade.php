@@ -7,19 +7,23 @@
             </div>
             <hr>
             @include('coworkers::partials.messages')
-            <form action="{{ route('departments.store') }}" method="POST">
+            <form action="{{ route('departments.update', $department->id) }}" method="POST">
                 @csrf
+                @method('PUT')
                 <div class="form-row">
                     <div class="form-group col-md-3">
                         <label for="name">نام</label>
-                        <input class="form-control" id="name" name="name" type="text">
+                        <input class="form-control" value="{{ $department->name }}" name="name" type="text">
                     </div>
-
                     <div class="form-group col-md-3">
-                        <label for="slug">مدیر دپارتمان</label>
+                        <label for="slug">لیست کارمندان</label>
                         <select class="form-control" name="boss_id">
+                            <option value="">ندارد</option>
                             @foreach($coworkers as $coworker)
-                                <option value="{{ $coworker->id }}">{{ $coworker->fullname }}</option>
+                                <option value="{{ $coworker->id }}"
+                                    {{ $department->isBossSelected($coworker) ? "selected" : "" }}>
+                                    {{ $coworker->fullname }}
+                                </option>
                             @endforeach
                         </select>
                     </div>

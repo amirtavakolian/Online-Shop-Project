@@ -13,11 +13,16 @@ class Department extends Model
 
     public function boss()
     {
-        return $this->hasOne(Coworker::class);
+        return $this->belongsTo(Coworker::class);
     }
 
     public function getDepartmentBossAttribute()
     {
-        return $this->boss_id && $this->boss_id == $this->boss->id ? $this->boss->fullname : 'تعیین نشده';
+        return $this->boss_id ? [$this->boss->fullname, 'green'] : ['تعیین نشده', 'red'];
+    }
+
+    public function isBossSelected($coworker)
+    {
+        return $this->boss_id && $this->boss_id == $coworker->id;
     }
 }

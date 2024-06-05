@@ -13,7 +13,7 @@ class Coworker extends Model
 
     public function department()
     {
-        return $this->belongsTo(Department::class, 'boss_id');
+        return $this->hasOne(Department::class, 'boss_id');
     }
 
     public function getFullnameAttribute()
