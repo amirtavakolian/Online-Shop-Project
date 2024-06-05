@@ -10,8 +10,8 @@
 
         <div class="col-xl-12 col-md-12 mb-4 p-md-5 bg-white">
             <div class="d-flex justify-content-between mb-4">
-                <h5 class="font-weight-bold">لیست دسته دپارتمان ها</h5>
-                <a class="btn btn-sm btn-outline-primary" href="#">
+                <h5 class="font-weight-bold">لیست دپارتمان ها</h5>
+                <a class="btn btn-sm btn-outline-primary" href="{{ route('departments.create') }}">
                     <i class="fa fa-plus"></i>
                     ایجاد دپارتمان
                 </a>

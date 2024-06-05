@@ -9,6 +9,8 @@ class Department extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'boss_id'];
+
     public function boss()
     {
         return $this->hasOne(Coworker::class);
@@ -16,6 +18,6 @@ class Department extends Model
 
     public function getDepartmentBossAttribute()
     {
-        return $this->boss->name != null ? $this->boss->name : 'تعیین نشده';
+        return $this->boss != null ? $this->boss->name : 'تعیین نشده';
     }
 }
