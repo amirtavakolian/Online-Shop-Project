@@ -14,10 +14,9 @@ return new class extends Migration {
             $table->id();
             $table->string('title');
             $table->boolean('is_opened')->default(0);
-            $table->enum('status', ['pending', 'reviewing', 'responded', 'publish_later', 'closed']);
+            $table->enum('status', ['pending', 'reviewing', 'responded', 'publish_later', 'closed'])->default('pending');
             $table->text('content');
             $table->enum('priority', ['high', 'medium', 'low']);
-            $table->timestamp('published_at');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('department_id')->comment('define the departmant of the ticket');
             $table->unsignedBigInteger('coworker_id')->nullable()->comment('which coworker has opened the ticket first');

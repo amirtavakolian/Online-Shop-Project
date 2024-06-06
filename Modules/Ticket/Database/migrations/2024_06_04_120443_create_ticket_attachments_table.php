@@ -13,8 +13,8 @@ return new class extends Migration {
         Schema::create('ticket_attachments', function (Blueprint $table) {
             $table->id();
             $table->string('file_path');
-            $table->integer('imageable_id');
-            $table->string('imageable_type');
+            $table->integer('attachmentable_id');
+            $table->string('attachmentable_type');
             $table->timestamps();
         });
     }

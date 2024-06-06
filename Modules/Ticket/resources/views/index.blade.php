@@ -62,7 +62,7 @@
                                 </ul>
                             </div>
 
-                            <a href="" class="btn btn-success pull-right">تیک جدید</a>
+                            <a href="{{ route('tickets.create') }}" class="btn btn-success pull-right">تیک جدید</a>
 
                             <div class="padding"></div>
                             <div class="row">
