@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Modules\Coworkers\App\Http\Requests\StoreCoworkerRequest;
 use Modules\Coworkers\App\Models\Coworker;
 use Modules\Coworkers\App\Models\Department;
+use Modules\Ticket\App\Models\Ticket;
 
 class CoworkersController extends Controller
 {

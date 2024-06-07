@@ -49,8 +49,8 @@
                             <h2>Issues</h2>
                             <hr>
                             <div class="btn-group">
-                                <button type="button" class="btn btn-default active">{{ $openedTicketsCount }} Open</button>
-                                <button type="button" class="btn btn-default">{{ $closedTicketsCount }} Closed</button>
+                                <button type="button" class="btn btn-default active">162 Open</button>
+                                <button type="button" class="btn btn-default">95,721 Closed</button>
                             </div>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -73,7 +73,7 @@
                                 @foreach($tickets as $ticket)
                                     <div class="col-md-12">
                                         <ul class="list-group fa-padding">
-                                            <a href="{{ route('tickets.show', ['ticket' => $ticket->id]) }}">
+                                            <a href="{{ route('coworkers.tickets.show', ['ticket' => $ticket->id]) }}">
                                                 <li class="list-group-item" data-toggle="modal" data-target="#issue">
                                                     <div class="media">
                                                         <i class="fa fa-cog pull-left"></i>
@@ -84,11 +84,10 @@
                                                             <span class="number pull-right"># {{ $ticket->id }}</span>
                                                             <p class="info">Opened by <a
                                                                     href="#">{{ $ticket->user->name }}</a>
-                                                                {{ $ticket->created_at->diffForHumans() }}
-                                                                <i class="fa fa-comments"></i>
-                                                                <a href="#">{{ $ticket->ticketAnswer->count() }}
+                                                                {{ $ticket->created_at }}
+                                                                <i class="fa fa-comments"></i> <a
+                                                                    href="#">{{ $ticket->ticketAnswer->count() }}
                                                                     replies </a>
-                                                                <span class="badge">{{ $ticket->department->name }}</span>
                                                             </p>
                                                         </div>
                                                     </div>

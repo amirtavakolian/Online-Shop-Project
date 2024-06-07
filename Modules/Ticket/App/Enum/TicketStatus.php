@@ -7,6 +7,17 @@ enum TicketStatus: string
     case PENDING = 'در انتظار پاسخ';
     case REVIEWING = 'در حال بررسی';
     case RESPONDED = 'پاسخ داده شد';
-    case PUBLISH_LATER = 'در انتظار انتشار';
     case CLOSED = 'بسته شده';
+
+
+    public static function getValue(string $caseName): array
+    {
+        return match ($caseName) {
+            'PENDING' => ['danger', self::PENDING->value],
+            'REVIEWING' => ['warning', self::REVIEWING->value],
+            'RESPONDED' => ['success', self::RESPONDED->value],
+            'CLOSED' => ['primary', self::RESPONDED->value],
+        };
+    }
+
 }

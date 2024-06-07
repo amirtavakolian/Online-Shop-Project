@@ -6,7 +6,7 @@ use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class StoreTicketRequest extends FormRequest
+class StoreTicketReplyRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,17 +24,9 @@ class StoreTicketRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "title" => "required",
-            "priority" => "required|in:HIGH,MEDIUM,LOW",
-            "department_id" => "required|exists:departments,id",
-            "content" => "required"
+            "ticket_id" => "required|exists:tickets,id",
+            "content" => "required|min:5"
         ];
     }
 
-    public function validated($key = null, $default = null)
-    {
-        $validatedData = parent::validated();
-        $validatedData['coworker_id'] = Auth::guard('coworker')->user()->id;
-        return $validatedData;
-    }
 }
