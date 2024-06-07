@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->string('lastname');
             $table->string('username');
             $table->string('password');
+            $table->rememberToken();
             $table->unsignedBigInteger('department_id')->nullable();
             $table->foreign('department_id')->references('id')->on('departments');
             $table->timestamps();
