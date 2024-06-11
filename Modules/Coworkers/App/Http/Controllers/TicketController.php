@@ -4,9 +4,11 @@ namespace Modules\Coworkers\App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Modules\Auth\App\Models\User;
 use Modules\Coworkers\App\Http\Requests\StoreTicketReplyRequest;
 use Modules\Coworkers\App\Models\Ticket;
 use Modules\Coworkers\App\Models\TicketAnswer;
+use Modules\Coworkers\App\Notifications\TicketRespondedNotification;
 use Modules\Ticket\App\Enum\TicketStatus;
 
 
@@ -38,6 +40,7 @@ class TicketController extends Controller
     {
         $ticketAnswer = TicketAnswer::query()->create($request->validated());
         $ticketAnswer->ticket->updateTicketStatus('responded');
+        User::find($request->input('user_id'))->notify(new TicketRespondedNotification());
         return redirect()->route('coworkers.tickets.index')->with('success', 'تیکت شما با موفقیت ثبت شد');
     }
 }

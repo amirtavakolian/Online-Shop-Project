@@ -56,7 +56,9 @@
                             <h4><label>پاسخ:</label></h4>
                             <textarea name="content" id="editor1" class="form-control mb-5 editor"></textarea>
                             <input type="hidden" name="ticket_id" value="{{ $ticket->id }}">
+                            <input type="hidden" name="user_id" value="{{ $ticket->user->id }}">
                             <input type="submit" class="alert-success form-control " style="margin-top: 20px" value="ثبت پاسخ">
+
                         </div>
                     </form>
                 </div>

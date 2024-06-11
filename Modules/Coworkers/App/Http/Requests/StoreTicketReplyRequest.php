@@ -25,7 +25,8 @@ class StoreTicketReplyRequest extends FormRequest
     {
         return [
             "ticket_id" => "required|exists:tickets,id",
-            "content" => "required|min:5"
+            "content" => "required|min:5",
+            "user_id" => "required|exists:users,id"
         ];
     }
 

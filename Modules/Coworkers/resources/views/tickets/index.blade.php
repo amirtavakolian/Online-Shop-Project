@@ -91,12 +91,26 @@
                                                             </p>
                                                         </div>
                                                     </div>
+                                                    <div class="row" style="margin-top: 2%;">
+                                                        <div class="col-lg-2">
+                                                            <a href="#" class="btn btn-primary text-white"
+                                                               style="color: white; font-weight: bolder;">
+                                                                ارجاع به همکار
+                                                            </a>
+                                                        </div>
+                                                        <div class="col-lg-2">
+                                                            <a href="#" class="btn btn-success"
+                                                               style="color: white; font-weight: bolder; margin-top: 2%;">
+                                                                ارجاع به دپارتمان
+                                                            </a>
+                                                        </div>
+                                                    </div>
                                                 </li>
                                             </a>
                                         </ul>
                                     </div>
-                                @endforeach
 
+                                @endforeach
                             </div>
                         </div>
                     </div>
