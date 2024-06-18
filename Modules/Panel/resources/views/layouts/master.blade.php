@@ -51,36 +51,31 @@
 
         <!-- Nav Item - Charts -->
         @foreach(config('panel.items') as $config)
-            <li class="nav-item">
-                <a class="nav-link" href="{{ $config['url'] }}">
-                    <i class="{{ $config['class'] }}"></i>
-                    <span> {{ $config['name'] }} </span></a>
-            </li>
+            @if(!array_key_exists('sub-menu', $config))
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ $config['url'] }}">
+                        <i class="{{ $config['class'] }}"></i>
+                        <span> {{ $config['name'] }} </span></a>
+                </li>
+            @else
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages{{$config['id']}}"
+                       aria-expanded="true"
+                       aria-controls="collapsePages{{$config['id']}}">
+                        <i class="{{ $config['class'] }}"></i>
+                        <span>{{ $config['name'] }}</span>
+                    </a>
+                    <div id="collapsePages{{$config['id']}}" class="collapse" aria-labelledby="headingPages"
+                         data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            @foreach($config['sub-menu'] as $subMenu)
+                                <a class="collapse-item" href="{{ $subMenu['url'] }}">{{ $subMenu['name'] }}</a>
+                            @endforeach
+                        </div>
+                    </div>
+                </li>
+            @endif
         @endforeach
-
-        <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
-               aria-controls="collapsePages">
-                <i class="fas fa-fw fa-folder"></i>
-                <span>تغییر صفحات</span>
-            </a>
-            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header"> صفحات ورود : </h6>
-                    <a class="collapse-item" href="login.html"> ورود </a>
-                    <a class="collapse-item" href="register.html"> عضویت </a>
-                    <a class="collapse-item" href="forgot-password.html"> فراموشی رمز عبور </a>
-                    <div class="collapse-divider"></div>
-                    <h6 class="collapse-header"> صفحات دیگر : </h6>
-                    <a class="collapse-item" href="404.html">404 Page</a>
-                    <a class="collapse-item" href="#">Blank Page</a>
-                </div>
-            </div>
-        </li>
-
-        <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block">
 
         <!-- Sidebar Toggler (Sidebar) -->
         <div class="text-center d-none d-md-inline">
@@ -288,7 +283,8 @@
 
                     <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                           data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
                             <span class="ml-2 d-none d-lg-inline text-gray-600 small">امیر توکلیان</span>
                             <img class="img-profile rounded-circle" src="{{ asset('modules/panel/img/user.jpg') }}">
