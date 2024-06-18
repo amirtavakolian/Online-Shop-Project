@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'coworker' => [
+            'driver' => 'session',
+            'provider' => 'coworkers',
+        ],
     ],
 
     /*
@@ -63,6 +67,10 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => \Modules\Auth\App\Models\User::class,
+        ],
+        'coworkers' => [
+            'driver' => 'eloquent',
+            'model' => \Modules\Coworkers\App\Models\Coworker::class,
         ],
 
         // 'users' => [
@@ -97,6 +105,10 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+        'coworkers' => [
+            'driver' => 'eloquent',
+            'model' => \Modules\Coworkers\App\Models\Coworker::class
+        ]
     ],
 
     /*
