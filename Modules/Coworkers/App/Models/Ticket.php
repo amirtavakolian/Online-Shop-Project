@@ -60,4 +60,10 @@ class Ticket extends Model
         return TicketAttachment::where('attachmentable_id', $this->id)->get();
     }
 
+    public function updateTicketOpenedBy($coworker_id)
+    {
+        $this->coworker_id = $coworker_id;
+        $this->save();
+    }
+
 }

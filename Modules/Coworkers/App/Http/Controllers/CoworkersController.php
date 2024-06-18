@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Hash;
 use Modules\Coworkers\App\Http\Requests\StoreCoworkerRequest;
 use Modules\Coworkers\App\Models\Coworker;
 use Modules\Coworkers\App\Models\Department;
-use Modules\Ticket\App\Models\Ticket;
 
 class CoworkersController extends Controller
 {
@@ -30,6 +29,15 @@ class CoworkersController extends Controller
         $coworkerData['password'] = Hash::make($request->input('password'));
         Coworker::query()->create($coworkerData);
         return redirect()->back()->with('success', 'کارمند با موفقیت ساخته شد');
+    }
+
+    public function getCowokersList($departmentId)
+    {
+        $coworkers = Coworker::query()->where('department_id', $departmentId)->get();
+        return response()->json([
+            'coworkers' => $coworkers,
+            'status' => 200
+        ]);
     }
 }
 

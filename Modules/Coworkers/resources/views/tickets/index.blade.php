@@ -66,8 +66,6 @@
                                 </ul>
                             </div>
 
-                            <a href="{{ route('tickets.create') }}" class="btn btn-success pull-right">تیک جدید</a>
-
                             <div class="padding"></div>
                             <div class="row">
                                 @foreach($tickets as $ticket)
@@ -94,7 +92,8 @@
                                                     <div class="row" style="margin-top: 2%;">
                                                         <div class="col-lg-2">
                                                             <a href="#" class="btn btn-primary text-white"
-                                                               style="color: white; font-weight: bolder;">
+                                                               style="color: white; font-weight: bolder;"
+                                                               id="refer_to_coworker">
                                                                 ارجاع به همکار
                                                             </a>
                                                         </div>
@@ -109,13 +108,56 @@
                                             </a>
                                         </ul>
                                     </div>
-
                                 @endforeach
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <div class="col-md-9 fade" id="refer_to_coworker_section">
+                    <div class="grid support-content">
+                        <div class="grid-body">
+                            <h2>اجراء به همکار: </h2>
+                            <hr>
+                            <form method="POST" action="{{ route('referToColleague') }}">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">کارمند ارسال کننده</label>
+                                    <input type="text" class="form-control"
+                                           value="{{ auth()->guard('coworker')->user()->fullname }}" disabled>
+                                    <input type="hidden" class="form-control" name="from_coworker_id"
+                                           value="{{ auth()->guard('coworker')->user()->id }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">دپارتمان:</label>
+                                    <input type="text" class="form-control"
+                                           value="{{ auth()->guard('coworker')->user()->department->name }}" disabled>
+                                    <input type="hidden" class="form-control" name="department_id"
+                                           value="{{ auth()->guard('coworker')->user()->department_id }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">تیکت:</label>
+                                    <select name="ticket_id" class="form-control">
+                                        @foreach($tickets as $ticket)
+                                            <option value="{{ $ticket->id }}">{{ $ticket->title }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">ارجاع به:</label>
+                                    <select class="form-control" name="to_coworker_id" id="to_coworker_id">
+
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">توضیحات:</label>
+                                    <textarea class="form-control" name="description"></textarea>
+                                </div>
+                                <input type="submit" value="ارجاء" class="btn btn-primary">
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </div>
@@ -125,4 +167,32 @@
 
     </script>
     </body>
+@endsection
+@section('scripts')
+    <script>
+        let referCoworker = document.getElementById('refer_to_coworker')
+        referCoworker.addEventListener('click', function (e) {
+            let referToCoworkerSection = document.getElementById('refer_to_coworker_section')
+            referToCoworkerSection.classList.toggle('fade')
+            let route = `{{ route('coworkers.list', ['department' => ':department']) }}`
+            route = route.replace(':department', `{{ auth()->guard('coworker')->user()->department_id }}`)
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', route)
+            xhr.send()
+
+            xhr.addEventListener('load', function (e) {
+                let coworkersList = JSON.parse(xhr.response).coworkers;
+                let list = ""
+                let toCoworker = document.getElementById("to_coworker_id")
+
+                coworkersList.map((cowroker) => {
+                    list += `
+                        <option value="${cowroker.id}">${cowroker.firstname} ${cowroker.lastname}</option>
+                    `
+                })
+                toCoworker.innerHTML += list
+            })
+        });
+    </script>
 @endsection

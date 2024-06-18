@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('ticket_coworker_refer', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('from_coworker');
-            $table->foreign('from_coworker')->references('id')->on('coworkers');
-            $table->unsignedBigInteger('to_coworker');
-            $table->foreign('to_coworker')->references('id')->on('coworkers');
+            $table->unsignedBigInteger('from_coworker_id');
+            $table->foreign('from_coworker_id')->references('id')->on('coworkers');
+            $table->unsignedBigInteger('to_coworker_id');
+            $table->foreign('to_coworker_id')->references('id')->on('coworkers');
             $table->unsignedBigInteger('department_id');
             $table->foreign('department_id')->references('id')->on('departments');
             $table->text('description')->nullable();
