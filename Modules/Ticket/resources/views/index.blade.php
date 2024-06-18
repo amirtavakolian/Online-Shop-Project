@@ -49,7 +49,8 @@
                             <h2>Issues</h2>
                             <hr>
                             <div class="btn-group">
-                                <button type="button" class="btn btn-default active">{{ $openedTicketsCount }} Open</button>
+                                <button type="button" class="btn btn-default active">{{ $openedTicketsCount }}Open
+                                </button>
                                 <button type="button" class="btn btn-default">{{ $closedTicketsCount }} Closed</button>
                             </div>
                             <div class="btn-group">
@@ -73,12 +74,14 @@
                                 @foreach($tickets as $ticket)
                                     <div class="col-md-12">
                                         <ul class="list-group fa-padding">
-                                            <a href="{{ route('tickets.show', ['ticket' => $ticket->id]) }}">
+                                            < href="{{ route('tickets.show', ['ticket' => $ticket->id]) }}">
                                                 <li class="list-group-item" data-toggle="modal" data-target="#issue">
                                                     <div class="media">
                                                         <i class="fa fa-cog pull-left"></i>
                                                         <div class="media-body">
-                                                            <strong>{{ $ticket->title }}</strong>
+                                                            <a href="{{ route('tickets.show', ['ticket' => $ticket->id]) }}">
+                                                                <strong>{{ $ticket->title }}</strong>
+                                                            </a>
                                                             <span
                                                                 class="label label-{{ $ticket->ticket_status[0] }}">{{ $ticket->ticket_status[1] }}</span>
                                                             <span class="number pull-right"># {{ $ticket->id }}</span>
@@ -88,8 +91,17 @@
                                                                 <i class="fa fa-comments"></i>
                                                                 <a href="#">{{ $ticket->ticketAnswer->count() }}
                                                                     replies </a>
-                                                                <span class="badge">{{ $ticket->department->name }}</span>
+                                                                <span
+                                                                    class="badge">{{ $ticket->department->name }}</span>
                                                             </p>
+                                                            <br>
+                                                            @if(!$ticket->isClosed())
+                                                            <a href="{{ route('ticket.close', ['ticket' => $ticket->id]) }}"
+                                                               class="btn-sm btn-danger"
+                                                               style="color: white; font-weight: bolder">بستن تیکت</a>
+                                                            @else
+                                                                <button class="btn btn-warning" style="color: white; font-weight: bolder">بسته شد</button>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </li>
@@ -97,7 +109,6 @@
                                         </ul>
                                     </div>
                                 @endforeach
-
                             </div>
                         </div>
                     </div>

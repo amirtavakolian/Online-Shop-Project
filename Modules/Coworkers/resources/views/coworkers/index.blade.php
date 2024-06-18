@@ -45,7 +45,7 @@
                                 {{ $coworker->username }}
                             </th>
                             <th>
-                                {{ $coworker->department->name }}
+                                {{ $coworker->departmentt->name }}
                             </th>
                             <th>
                                 <a class="btn btn-sm btn-success mr-3" href="#">ویرایش</a>

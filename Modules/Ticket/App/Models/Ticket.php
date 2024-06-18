@@ -51,4 +51,9 @@ class Ticket extends Model
         $this->status = $status;
         $this->save();
     }
+
+    public function isClosed()
+    {
+        return $this->status == strtolower(TicketStatus::CLOSED->name);
+    }
 }

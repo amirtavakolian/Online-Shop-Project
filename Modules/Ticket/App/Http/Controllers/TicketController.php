@@ -5,6 +5,7 @@ namespace Modules\Ticket\App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Modules\Coworkers\App\Models\Department;
+use Modules\Ticket\App\Enum\TicketStatus;
 use Modules\Ticket\App\Http\Requests\StoreTicketReplyRequest;
 use Modules\Ticket\App\Http\Requests\StoreTicketRequest;
 use Modules\Ticket\App\Models\Ticket;
@@ -58,5 +59,12 @@ class TicketController extends Controller
         $ticketAnswer = TicketAnswer::query()->create($requestُ->validated());
         $ticketAnswer->ticket->updateTicketStatus('pending');
         return redirect()->route('tickets.index')->with('success', 'تیکت شما با موفقیت ثبت شد');
+    }
+
+    public function close(Ticket $ticket)
+    {
+        $ticket->status = strtolower(TicketStatus::CLOSED->name);
+        $ticket->save();
+        return redirect()->back();
     }
 }
