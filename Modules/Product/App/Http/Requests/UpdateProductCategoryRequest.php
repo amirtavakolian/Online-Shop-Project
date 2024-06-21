@@ -29,4 +29,20 @@ class UpdateProductCategoryRequest extends FormRequest
             "variation_values" => "required",
         ];
     }
+
+    protected function passedValidation()
+    {
+        foreach ($this->input('attribute_ids') as $key => $attribute) {
+            $attributes[$key]['value'] = $attribute;
+        }
+        $this->merge(['attribute_ids' => $attributes]);
+
+        foreach ($this->input('variation_values') as $key => $variationAttribute) {
+            foreach ($variationAttribute as $variationAttributeKey => $attribute) {
+                $variationAttributes[$variationAttributeKey][$key] = $attribute;
+                $variationAttributes[$variationAttributeKey]['attribute_id'] = $this->input('attribute_id');
+            }
+        }
+        $this->merge(['variation_values' => $variationAttributes]);
+    }
 }

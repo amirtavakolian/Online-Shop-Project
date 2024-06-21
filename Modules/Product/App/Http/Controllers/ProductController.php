@@ -79,23 +79,7 @@ class ProductController extends Controller
 
     public function updateCategory(UpdateProductCategoryRequest $request, Product $product)
     {
-        $product->category_id = $request->input('category_id');
-        $product->save();
-
-        foreach ($request->input('attribute_ids') as $key => $attribute) {
-            $attributes[$key]['value'] = $attribute;
-        }
-        $product->attributes()->sync($attributes);
-
-        $variationAttributes = [];
-        foreach ($request->variation_values as $key => $variationAttribute) {
-            foreach ($variationAttribute as $variationAttributeKey => $attribute) {
-                $variationAttributes[$variationAttributeKey][$key] = $attribute;
-                $variationAttributes[$variationAttributeKey]['attribute_id'] = $request->attribute_id;
-            }
-        }
-        $product->variationAttribute()->detach();
-        $product->variationAttribute()->sync($variationAttributes);
+        $this->productRepository->updateProductCategory($product, $request->all());
         return redirect()->route('product.index')->with('success', 'آپدیت با موفقیت انجام شد');
     }
 

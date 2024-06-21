@@ -52,13 +52,16 @@ class ProductRepository implements IProductRepository
         ]);
         $product->tags()->sync($data['tag_ids']);
         $product->attributes()->sync($data['attribute_values']);
-        foreach ($data['variation_values'] as $attribute) {
-            $product->variationAttribute()->sync([$data["attirbute_id"] => $attribute]);
+        foreach ($product->variationAttribute as $key => $productVariationAttribute) {
+            $productVariationAttribute->pivot->update($data['variation_values'][$key]);
         }
     }
 
-    public function updateProductCategory()
+    public function updateProductCategory($product, $data)
     {
-
+        $product->update(['category_id' => $data['category_id']]);
+        $product->attributes()->sync($data['attribute_ids']);
+        $product->variationAttribute()->detach();
+        $product->variationAttribute()->sync($data['variation_values']);
     }
 }
