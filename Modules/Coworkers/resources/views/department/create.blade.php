@@ -18,6 +18,7 @@
                     <div class="form-group col-md-3">
                         <label for="slug">مدیر دپارتمان</label>
                         <select class="form-control" name="boss_id">
+                            <option value="">بدون مدیریت</option>
                             @foreach($coworkers as $coworker)
                                 <option value="{{ $coworker->id }}">{{ $coworker->fullname }}</option>
                             @endforeach

@@ -25,8 +25,8 @@ class PanelServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/migrations'));
 
-        Gate::define('access-panel', function (User $user) {
-            if(auth()->user()->isAdmin()){
+        Gate::before(function (User $user) {
+            if (auth()->user()->isAdmin()) {
                 return true;
             }
         });

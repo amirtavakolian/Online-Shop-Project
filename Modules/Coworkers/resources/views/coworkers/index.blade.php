@@ -10,7 +10,7 @@
 
         <div class="col-xl-12 col-md-12 mb-4 p-md-5 bg-white">
             <div class="d-flex justify-content-between mb-4">
-                <h5 class="font-weight-bold">لیست کارمندها ها</h5>
+                <h5 class="font-weight-bold">لیست کارمندها</h5>
                 <a class="btn btn-sm btn-outline-primary" href="{{ route('coworkers.create') }}">
                     <i class="fa fa-plus"></i>
                     ایجاد کارمند

@@ -2,8 +2,6 @@
 
 namespace Modules\Product\App\Repositories;
 
-use Exception;
-use Illuminate\Support\Facades\DB;
 use Modules\Product\App\Models\Product;
 use Modules\Product\App\Repositories\Contract\IProductRepository;
 
@@ -12,7 +10,16 @@ class ProductRepository implements IProductRepository
 
     public function store(array $productData)
     {
-        return Product::query()->create($productData);
+        return Product::query()->create([
+            "name" => $productData["name"],
+            "slug" => $productData["slug"],
+            "brand_id" => $productData["brand_id"],
+            "category_id" => $productData["category_id"],
+            "description" => $productData["description"],
+            "primary_image" => $productData["primary_image"],
+            "delivery_amount" => $productData["delivery_amount"],
+            "delivery_amount_per_product" => $productData["delivery_amount_per_product"],
+        ]);
     }
 
     public function storeImages(Product $product, array $images)
@@ -25,25 +32,12 @@ class ProductRepository implements IProductRepository
 
     public function storeAttributes(Product $product, $attributes)
     {
-        $data = array_map(function ($value, $attribute) {
-            return [
-                "attribute_id" => $attribute,
-                "value" => $value
-            ];
-        }, $attributes, array_keys($attributes));
-        $product->attributes()->sync($data);
+        $product->attributes()->sync($attributes);
     }
 
     public function storeVariationAttributes(Product $product, $attributes)
     {
-        $refactorAttributes = [];
-        foreach ($attributes as $key => $attribute) {
-            foreach ($attribute as $k => $attributeValue) {
-                $refactorAttributes[$k][$key] = $attributeValue;
-            }
-        }
-        $refactorAttributes[0]['attribute_id'] = 1;
-        $product->variationAttribute()->sync($refactorAttributes);
+        $product->variationAttribute()->sync($attributes);
     }
 
     public function update(Product $product, $data)

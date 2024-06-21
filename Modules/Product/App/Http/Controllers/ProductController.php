@@ -4,7 +4,6 @@ namespace Modules\Product\App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Exception;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Modules\Product\App\Http\Requests\StoreProductRequest;
 use Modules\Product\App\Http\Requests\UpdateProductCategoryRequest;
@@ -40,13 +39,13 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         try {
-            $productData = $request->validated();
-            $productData['primary_image'] = $this->fileUploader->upload($request->file('primary_image'), 'product_images');
-            $product = $this->productRepository->store($productData);
-            $images = $this->fileUploader->uploadFiles($request->file('images'), 'product_sec_images');
-            $this->productRepository->storeImages($product, $images);
-            $this->productRepository->storeAttributes($product, $productData['attribute_ids']);
-            $this->productRepository->storeVariationAttributes($product, $productData['variation_values']);
+            $validatedProductData = $request->validated();
+            $validatedProductData['primary_image'] = $this->fileUploader->upload($request->file('primary_image'), '/products');
+            $product = $this->productRepository->store($validatedProductData);
+            $this->productRepository->storeAttributes($product, $request->input('attribute_ids'));
+            $this->productRepository->storeVariationAttributes($product, $request->input('variation_values'));
+            $productSecondaryImages = $this->fileUploader->uploadFiles($request->file('images'), 'products-secondary');
+            $this->productRepository->storeImages($product, $productSecondaryImages);
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return redirect()->back()->with('failed', 'خطای سیستمی');

@@ -24,7 +24,7 @@ class StoreDepartmentRequest extends FormRequest
     {
         return [
             "name" => "required|unique:departments,name",
-            "boss_id" => "exists:coworkers,id"
+            "boss_id" => "nullable|exists:coworkers,id"
         ];
     }
 }

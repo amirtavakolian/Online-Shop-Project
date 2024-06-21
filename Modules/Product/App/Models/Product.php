@@ -58,6 +58,11 @@ class Product extends Model
             ->pluck('tag_id')
             ->toArray()) ? "selected" : "";
     }
+
+    public function getProductActiveStatusAttribute()
+    {
+        return $this->is_active ? "فعال" : "غیر فعال";
+    }
 }
 
 

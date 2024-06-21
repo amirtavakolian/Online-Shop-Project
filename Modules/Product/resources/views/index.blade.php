@@ -42,7 +42,7 @@
                             <th>
                                 <span
                                     class="{{ $product->getRawOriginal('is_active') ? 'text-success' : 'text-danger' }}">
-                                    {{ $product->is_active }}
+                                    {{ $product->productActiveStatus }}
                                 </span>
                             </th>
                             <th>
