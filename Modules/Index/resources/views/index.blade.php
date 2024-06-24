@@ -208,11 +208,9 @@
                                     </div>
                                     <div class="pro-details-meta">
                                         <span>تگ ها :</span>
-                                        <ul>
-                                            @foreach($product->tags as $tag)
-                                                <li><a href="#">{{ $tag->name, }}</a></li>
-                                            @endforeach
-                                        </ul>
+                                        @foreach($product->tags as $tag)
+                                            <a href="#">#{{ $tag->name }} </a>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>

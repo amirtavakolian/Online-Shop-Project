@@ -11,6 +11,8 @@ class Attribute extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'id';
+
     protected $fillable = ['attribute_id'];
 
     public function categories()

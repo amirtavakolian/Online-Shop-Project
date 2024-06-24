@@ -95,10 +95,10 @@
                                             class="ht-product ht-product-action-on-hover ht-product-category-right-bottom mb-30">
                                             <div class="ht-product-inner">
                                                 <div class="ht-product-image-wrap">
-                                                    <a href="product-details.html" class="ht-product-image">
+                                                    <div class="ht-product-image">
                                                         <img src="{{ asset('storage/'.$product->primary_image) }}"
                                                              alt="Universal Product Style"/>
-                                                    </a>
+                                                    </div>
                                                     <div class="ht-product-action">
                                                         <ul>
                                                             <li>

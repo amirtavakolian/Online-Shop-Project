@@ -40,7 +40,7 @@
                                     </ul>
                                 </li>
                                 <li class="angle-shape">
-                                    <a href="index.html"> صفحه اصلی </a>
+                                    <a href="{{ env('APP_URL') }}"> صفحه اصلی </a>
                                 </li>
                             </ul>
                         </nav>

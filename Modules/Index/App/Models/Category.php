@@ -4,12 +4,11 @@ namespace Modules\Index\App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Modules\Index\App\Models\Attribute;
-use Modules\Index\App\Models\Product;
 
-class Category extends Model
+class   Category extends Model
 {
     use HasFactory;
+
     protected $with = ['children'];
 
     public function products()
@@ -38,5 +37,31 @@ class Category extends Model
     public function children()
     {
         return $this->hasMany(self::class, 'parent_id');
+    }
+
+    public function productAttributes()
+    {
+        return $this->hasManyThrough(ProductAttribute::class, Product::class);
+    }
+
+    public function productVariations()
+    {
+        return $this->hasManyThrough(ProductVariations::class, Product::class);
+    }
+
+    public function categoryProductsAttributes()
+    {
+        foreach ($this->productAttributes as $productAttribute) {
+            $categoryAttributes[$productAttribute->attribute->name][] = $productAttribute->value;
+        }
+        return $categoryAttributes;
+    }
+
+    public function categoryProductsVariations()
+    {
+        foreach ($this->productVariations as $productVariation) {
+            $categoryVariationAttributes[$productVariation->attribute->name][] = $productVariation->value;
+        }
+        return $categoryVariationAttributes;
     }
 }

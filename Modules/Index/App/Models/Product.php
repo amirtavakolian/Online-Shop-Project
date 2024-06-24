@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Schema;
-use Modules\Index\App\Models\ProductImage;
 
 class Product extends Model
 {
@@ -20,20 +19,14 @@ class Product extends Model
 
     public function isInSaleDateRange()
     {
-        $productVariation = $this->variationAttribute->first()->pivot;
-        if ($productVariation->date_on_sale_from != null) {
-            $now = Carbon::parse(Carbon::now());
-            $salesStartDate = Carbon::parse($productVariation->date_on_sale_from);
-            $salesEndDate = Carbon::parse($productVariation->date_on_sale_to);
-
-            if ($now->startOfDay()->gte($salesStartDate->startOfDay())
-                &&
-                $now->startOfDay()->lte($salesEndDate->startOfDay())
-            ) {
-                return true;
+        foreach ($this->variationAttribute as $attribute) {
+            if ($attribute->pivot->date_on_sale_from != null && $attribute->pivot->date_on_sale_to != null) {
+                if (Carbon::parse($attribute->pivot->date_on_sale_from)->lte(Carbon::now()) &&
+                    Carbon::now()->lte($attribute->pivot->date_on_sale_to)) {
+                    return true;
+                }
             }
         }
-        return false;
     }
 
     public function salePrice()

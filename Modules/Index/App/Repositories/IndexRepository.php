@@ -3,9 +3,8 @@
 namespace Modules\Index\App\Repositories;
 
 use Modules\Index\App\Models\Banner;
-use Modules\Index\App\Models\Category;
-use Modules\Index\App\Repositories\Contract\IIndexRepository;
 use Modules\Index\App\Models\Product;
+use Modules\Index\App\Repositories\Contract\IIndexRepository;
 
 class IndexRepository implements IIndexRepository
 {
@@ -21,7 +20,7 @@ class IndexRepository implements IIndexRepository
 
     public function products()
     {
-        return Product::all();
+        return Product::query()->where('status', 1)->get();
     }
 
 }
