@@ -99,7 +99,7 @@
                                 <select id="categorySelect" name="category_id" class="form-control"
                                         data-live-search="true">
                                     @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->name }} -
+                                        <option value="{{ $category->id }}">{{ $category->parent->name }} -
                                             {{ $category->name }}
                                         </option>
                                     @endforeach

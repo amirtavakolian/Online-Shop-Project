@@ -12,5 +12,6 @@
     "Chat": true,
     "RolePermission": true,
     "Ticket": true,
+	"Index": true,
     "Coworkers": true
 }

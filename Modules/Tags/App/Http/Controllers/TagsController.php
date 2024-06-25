@@ -31,7 +31,7 @@ class TagsController extends Controller
         return view('tags::create');
     }
 
-    public function store(Request $request)
+    public function store(StoreTagRequest $request)
     {
         try {
             $this->tagRepo->store($request->validated());
