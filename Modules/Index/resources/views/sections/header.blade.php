@@ -4,8 +4,8 @@
             <div class="row">
                 <div class="col-xl-2 col-lg-2">
                     <div class="logo pt-40">
-                        <a href="index.html">
-                            <h3 class="font-weight-bold">WebProg.ir</h3>
+                        <a href="#">
+                            <h3 class="font-weight-bold">Online Shop</h3>
                         </a>
                     </div>
                 </div>
@@ -14,13 +14,13 @@
                         <nav>
                             <ul>
                                 <li class="angle-shape">
-                                    <a href="about_us.html"> ارتباط با ما </a>
+                                    <a href="#"> ارتباط با ما </a>
                                 </li>
 
-                                <li><a href="contact-us.html"> تماس با ما </a></li>
+                                <li><a href="#"> تماس با ما </a></li>
 
                                 <li class="angle-shape">
-                                    <a href="shop.html"> فروشگاه </a>
+                                    <a href="#"> فروشگاه </a>
 
                                     <ul class="mega-menu">
                                         @foreach($headerCategories as $category)
@@ -164,7 +164,7 @@
                 <div class="col-6">
                     <div class="mobile-logo">
                         <a href="index.html">
-                            <h4 class="font-weight-bold">WebProg.ir</h4>
+                            <h4 class="font-weight-bold">Online Shop</h4>
                         </a>
                     </div>
                 </div>
@@ -334,9 +334,9 @@
                             </ul>
                         </li>
 
-                        <li><a href="contact-us.html">تماس با ما</a></li>
+                        <li><a href="#">تماس با ما</a></li>
 
-                        <li><a href="about_us.html"> در باره ما</a></li>
+                        <li><a href="#"> در باره ما</a></li>
                     </ul>
                 </nav>
                 <!-- mobile menu navigation end -->
@@ -347,11 +347,11 @@
         <div class="mobile-curr-lang-wrap">
             <div class="single-mobile-curr-lang">
                 <ul class="text-right">
-                    <li class="my-3"><a href="login.html"> ورود </a></li>
+                    <li class="my-3"><a href="#"> ورود </a></li>
                     <li class="my-3">
-                        <a href="register.html"> ایجاد حساب </a>
+                        <a href="#"> ایجاد حساب </a>
                     </li>
-                    <li class="my-3"><a href="my-account.html"> پروفایل </a></li>
+                    <li class="my-3"><a href="#"> پروفایل </a></li>
                 </ul>
             </div>
         </div>

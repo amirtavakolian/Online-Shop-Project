@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Webprog.ir - Dashboard</title>
+    <title>Online Shop - Dashboard</title>
     <!-- Custom fonts for this template-->
     <link href="{{ asset('modules/panel/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('modules/panel/css/sb-admin-2.min.css') }}" rel="stylesheet" type="text/css">
@@ -28,7 +28,7 @@
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div>
-            <div class="sidebar-brand-text mx-3">WebProg.ir</div>
+            <div class="sidebar-brand-text mx-3">Online Shop</div>
         </a>
 
         <!-- Divider -->
@@ -335,7 +335,7 @@
         <footer class="sticky-footer bg-white">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; WebProg.ir 1399</span>
+                    <span>Copyright &copy; Online Shop</span>
                 </div>
             </div>
         </footer>
