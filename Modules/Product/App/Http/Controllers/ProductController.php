@@ -55,7 +55,7 @@ class ProductController extends Controller
 
     public function attributeCategory(Category $category)
     {
-        return response()->json($category->withFilterAttribute());
+        return response()->json($category->withAttributes());
     }
 
     public function edit(Product $product)

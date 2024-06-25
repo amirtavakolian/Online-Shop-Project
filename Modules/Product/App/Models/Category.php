@@ -19,11 +19,16 @@ class Category extends Model
         return $this->belongsToMany(Attribute::class)->withPivot(['is_filter', 'is_variation']);
     }
 
-    public function withFilterAttribute()
+    public function withAttributes()
     {
         return [
             "variation" => $this->attributes()->wherePivot('is_variation', 1)->get(),
             "attributes" => $this->attributes()->wherePivot('is_filter', 1)->get(),
         ];
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(self::class);
     }
 }
