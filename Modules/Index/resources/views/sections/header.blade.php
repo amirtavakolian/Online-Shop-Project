@@ -56,7 +56,7 @@
                             <button class="icon-cart-active">
                     <span class="icon-cart">
                       <i class="sli sli-bag"></i>
-                      <span class="count-style">02</span>
+                      <span class="count-style" style="background-color: red">02</span>
                     </span>
 
 

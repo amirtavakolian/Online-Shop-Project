@@ -5,6 +5,7 @@
 <script src="{{ asset('modules/index/js/plugins.js') }}"></script>
 <script src="{{ asset('modules/index/js/ajax-mail.js') }}"></script>
 <script src="{{ asset('modules/index/js/main.js') }}"></script>
+@yield('scripts')
 </body>
 
 </html>
