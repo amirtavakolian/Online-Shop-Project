@@ -44,6 +44,9 @@ class CartController extends Controller
 
     public function getCartItems()
     {
-
+        return response()->json([
+            "data" => $this->cartService->getCartItems(),
+            "status" => 200
+        ]);
     }
 }

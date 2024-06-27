@@ -56,7 +56,7 @@ class SessionCartService implements ICartService
         $productData = [
             "id" => $product->product->id,
             "name" => $product->product->name,
-            "image" => $product->product->primary_image,
+            "image" => url('/storage/' . $product->product->primary_image),
             "quantity" => $quantity,
             "price" => $product->price,
             "attribute" => $product->attribute->name,
@@ -77,5 +77,10 @@ class SessionCartService implements ICartService
     {
         $existProductQuantity = $this->sessionService->get(self::CART_SESSION_KEY . "." . $variantId)['quantity'] + 1;
         $this->sessionService->add(self::CART_SESSION_KEY . "." . $variantId, $this->generateProductData($product, $existProductQuantity));
+    }
+
+    public function getCartItems()
+    {
+        return $this->sessionService->get(self::CART_SESSION_KEY);
     }
 }

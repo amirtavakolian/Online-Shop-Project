@@ -251,13 +251,13 @@
         <!-- Modal end -->
     </div>
 
-    <div class="testimonial-area pt-80 pb-95 section-margin-1" style="background-image: url('assets/a.png')">
+    <div class="testimonial-area pt-80 pb-95 section-margin-1">
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 ml-auto mr-auto">
                     <div class="testimonial-active owl-carousel nav-style-1">
                         <div class="single-testimonial text-center">
-                            <img src="assets/img/testimonial/testi-1.png" alt=""/>
+                            <img src="" alt=""/>
                             <p>
                                 لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک
                                 است. چاپگرها و
@@ -306,7 +306,7 @@
                 <div class="col-xl-4 col-lg-4 col-md-4">
                     <div class="single-feature text-right mb-40">
                         <div class="feature-icon">
-                            <img src="assets/img/icon-img/free-shipping.png" alt=""/>
+                            <img src="" alt=""/>
                         </div>
                         <div class="feature-content">
                             <h4>لورم ایپسوم</h4>
@@ -317,7 +317,7 @@
                 <div class="col-xl-4 col-lg-4 col-md-4">
                     <div class="single-feature text-right mb-40 pl-50">
                         <div class="feature-icon">
-                            <img src="assets/img/icon-img/support.png" alt=""/>
+                            <img src="" alt=""/>
                         </div>
                         <div class="feature-content">
                             <h4>لورم ایپسوم</h4>
@@ -328,7 +328,7 @@
                 <div class="col-xl-4 col-lg-4 col-md-4">
                     <div class="single-feature text-right mb-40">
                         <div class="feature-icon">
-                            <img src="assets/img/icon-img/security.png" alt=""/>
+                            <img src="" alt=""/>
                         </div>
                         <div class="feature-content">
                             <h4>لورم ایپسوم</h4>
@@ -348,17 +348,15 @@
         const selectedVariant = document.querySelector("#selected-variant");
         const token = document.querySelector('meta[name="csrf-token"]').content;
 
-        window.addEventListener('load', function() {
-            console.log(sessionStorage.getItem('cart'));
+        window.addEventListener('load', function () {
+            loadCartItems();
         })
-
         addToCartSection.addEventListener("click", function (e) {
             e.preventDefault();
             if (e.target.hasAttribute('data-variant-id')) {
                 selectedVariant.value = e.target.attributes[1].nodeValue;
             }
         });
-
         addToCartSection.addEventListener("click", function (e) {
             if (e.target.classList.contains('cart')) {
                 e.preventDefault();
@@ -377,14 +375,58 @@
                     xhr.onload = function () {
                         if (this.status == 200) {
                             alert('محصول به سبد خرید شما اضافه شد')
-
                             const cartItemsCount = document.querySelector('span[class="count-style"]');
-                            cartItemsCount.innerText = Object.keys(JSON.parse(this.response).data).length;
+                            setCartItemsCountBadge(this.response);
+                            loadCartItems();
                         }
                     }
                 }
             }
         });
 
+        function setCartItemsCountBadge(items) {
+            const cartItemsCount = document.querySelector('span[class="count-style"]');
+            cartItemsCount.innerText = Object.keys(JSON.parse(items).data).length;
+        }
+
+        function loadCartItems() {
+            const cartItemsXhr = new XMLHttpRequest();
+            cartItemsXhr.open('GET', `{{ route('cart.items') }}`);
+            cartItemsXhr.send();
+
+            cartItemsXhr.onload = function () {
+
+                if (JSON.parse(this.response).data != null) {
+                    setCartItemsCountBadge(this.response);
+
+                    let cartItemsSidebar = document.querySelector("#cartItemsHeader");
+                    let totalPriceSection = document.querySelector(".shop-total");
+                    let cartItems = JSON.parse(this.response);
+                    let cart;
+                    let totalAmount = 0;
+
+                    for (item in cartItems.data) {
+                        totalAmount += cartItems.data[item].price;
+                        cart += `
+                    <li class="single-shopping-cart">
+                        <div class="shopping-cart-title">
+                            <h4><a href="#"> ${cartItems.data[item].name} </a></h4>
+                            </div>
+
+                         <div class="shopping-cart-img">
+                             <a href="#">
+                                <img alt="" src="${cartItems.data[item].image}"  style="width: 60px; height: 60px;"/>
+                             </a>
+                             <div class="item-close">
+                                <a href="#"><i class="sli sli-close"></i></a>
+                             </div>
+                         </div>
+                    </li>`
+                    }
+                    cartItemsSidebar.innerHTML = cart;
+                    totalPriceSection.innerHTML = totalAmount.toLocaleString() + " تومان";
+                }
+            }
+        }
     </script>
 @endsection
