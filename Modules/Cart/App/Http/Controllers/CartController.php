@@ -49,4 +49,13 @@ class CartController extends Controller
             "status" => 200
         ]);
     }
+
+    public function index()
+    {
+        $cartItems = $this->cartService->getCartItems();
+        $cartItemsPrice = $this->cartService->calculateCartPrice();
+        return view('cart::index', compact('cartItems', 'cartItemsPrice'));
+    }
+
+    }
 }
