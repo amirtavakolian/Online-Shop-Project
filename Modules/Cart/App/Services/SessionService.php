@@ -24,4 +24,8 @@ class SessionService
     }
 
 
+    public function clear($key)
+    {
+        Session::remove($key);
+    }
 }

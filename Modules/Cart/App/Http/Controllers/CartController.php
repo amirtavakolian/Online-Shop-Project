@@ -57,5 +57,9 @@ class CartController extends Controller
         return view('cart::index', compact('cartItems', 'cartItemsPrice'));
     }
 
+    public function clear()
+    {
+        $this->cartService->clear();
+        return redirect()->back();
     }
 }
