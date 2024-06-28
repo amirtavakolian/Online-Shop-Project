@@ -83,4 +83,26 @@ class SessionCartService implements ICartService
     {
         return $this->sessionService->get(self::CART_SESSION_KEY);
     }
+
+    public function calculateCartPrice()
+    {
+        $cartItems = $this->getCartItems();
+        $holePrice = 0;
+        
+        if ($cartItems) {
+            foreach ($cartItems as $item) {
+                if (isset($item['sale_price'])) {
+                    $holePrice += $item['sale_price'];
+                } else {
+                    $holePrice += $item['price'];
+                }
+            }
+            return $holePrice;
+        }
+    }
+
+    public function clear()
+    {
+        $this->sessionService->clear(self::CART_SESSION_KEY);
+    }
 }
