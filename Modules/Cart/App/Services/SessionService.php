@@ -22,16 +22,21 @@ class SessionService
         return Session::get($key);
     }
 
+    public function remove($key)
+    {
+        return Session::remove($key);
+    }
 
     public function clear($key)
     {
-        Session::remove($key);
+        Session::flush();
     }
-
     public function increase($key)
     {
         $item = $this->get($key);
         $item['quantity'] += 1;
         return $item;
     }
+
+
 }

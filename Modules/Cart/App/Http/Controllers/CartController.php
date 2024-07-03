@@ -81,4 +81,16 @@ class CartController extends Controller
 
         return response()->json($response);
     }
+
+    public function remove(ProductVariation $variation)
+    {
+        if (!$this->cartService->exists($variation->id)) {
+            $response = $this->createResponse(SessionCartService::PRODUCT_IS_NOT_EXISTS, 400);
+        } else {
+            $this->cartService->remove($variation->id);
+            $this->cartService->addItem('totalCartPrice', $this->cartService->calculateTotalCartPrice());
+            $response = $this->createResponse('محصول با موفقیت از سبد خرید شما حذف شد', 200);
+        }
+        return response()->json($response);
+    }
 }

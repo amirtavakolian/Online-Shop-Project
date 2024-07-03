@@ -98,10 +98,12 @@ class SessionCartService implements ICartService
         return $totalPrice;
     }
 
-    public function clear()
+    public function remove($key)
     {
-        $this->sessionService->clear(self::CART_SESSION_KEY);
+        return $this->sessionService->remove(self::CART_SESSION_KEY . '.' . $key);
     }
+
+
 
     public function increaseQuantity($variation)
     {
@@ -122,5 +124,15 @@ class SessionCartService implements ICartService
 
         $this->sessionService->add('totalCartPrice', $this->calculateTotalCartPrice());
         return $variation;
+    }
+
+    public function exists($variationId)
+    {
+        return $this->sessionService->exists(self::CART_SESSION_KEY . '.' . $variationId);
+    }
+
+    public function addItem($key, $value)
+    {
+        $this->sessionService->add($key, $value);
     }
 }

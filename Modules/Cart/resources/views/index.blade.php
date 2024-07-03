@@ -70,7 +70,7 @@
                                             <td class="product-subtotal">{{ $cartItem['attribute']  }}
                                                 - {{ $cartItem['attribute_value'] }}</td>
                                             <td class="product-remove">
-                                                <a href="" data-variation-id="{{ $variantId }}"><i
+                                                <a href="{{ route('cart.remove', ['variation' => $variantId]) }}" data-variation-id="{{ $variantId }}"><i
                                                         class="sli sli-close"></i></a>
                                             </td>
                                         </tr>
@@ -128,9 +128,15 @@
                                             @foreach(session()->get('cart') as $item)
                                                 <tr>
                                                     <td>{{ $item['name'] }}</td>
-                                                    <td>{{ number_format($item['price']) }} تومان </td>
+                                                    <td>
+                                                        @if(isset($item['sale_price']))
+                                                            {{ number_format($item['sale_price']) }} تومان
+                                                        @else
+                                                            {{ number_format($item['price']) }} تومان
+                                                        @endif
+                                                    </td>
                                                     <td>{{ $item['quantity'] }}</td>
-                                                    <td>{{ number_format($item['totalPrice']) }} تومان </td>
+                                                    <td>{{ number_format($item['totalPrice']) }} تومان</td>
                                                 </tr>
                                             @endforeach
                                         </table>
@@ -180,6 +186,7 @@
         increaseQuantity.addEventListener("click", function (e) {
 
             if (e.target.classList.contains('inc')) {
+                console.log(e.target.parentElement.parentElement.parentElement.children[6].children[0].attributes[1])
                 let variantId = e.target.parentElement.parentElement.parentElement.children[6].children[0].attributes[1].value;
                 let route = `{{ route('cart.increase', ['variation' => ':variation']) }}`
                 route = route.replace(':variation', variantId)

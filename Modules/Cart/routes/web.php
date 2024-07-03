@@ -10,14 +10,5 @@ Route::group(['prefix' => 'cart'], function () {
     Route::get('/', [CartController::class, 'index'])->name('cart.index');
     Route::get('/clear', [CartController::class, 'clear'])->name('cart.clear');
     Route::get('/{variation}/increase', [CartController::class, 'increase'])->name('cart.increase');
-});
-
-
-Route::get('/a', function () {
-
-    Session::flush();
-});
-Route::get('/b', function () {
-
-    dump(Session::all());
+    Route::get('/{variation}/remove', [CartController::class, 'remove'])->name('cart.remove');
 });
