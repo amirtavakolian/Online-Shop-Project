@@ -4,6 +4,7 @@ namespace Modules\Cart\App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Modules\Cart\App\Models\ProductVariation;
 use Modules\Cart\App\Services\Cart\SessionCartService;
 
 class CartController extends Controller
@@ -53,13 +54,31 @@ class CartController extends Controller
     public function index()
     {
         $cartItems = $this->cartService->getCartItems();
-        $cartItemsPrice = $this->cartService->calculateCartPrice();
-        return view('cart::index', compact('cartItems', 'cartItemsPrice'));
+        return view('cart::index', compact('cartItems'));
     }
 
     public function clear()
     {
         $this->cartService->clear();
         return redirect()->back();
+    }
+
+    public function increase(Request $request, ProductVariation $variation)
+    {
+        $result = $this->cartService->increaseQuantity($variation);
+
+        if ($result === SessionCartService::NOT_ENOUGH_STOCK) {
+            $response = $this->createResponse(SessionCartService::NOT_ENOUGH_STOCK, 400);
+        }
+
+        if ($result === SessionCartService::PRODUCT_IS_NOT_EXISTS) {
+            $response = $this->createResponse(SessionCartService::PRODUCT_IS_NOT_EXISTS, 400);
+        }
+
+        if ($result !== SessionCartService::PRODUCT_IS_NOT_EXISTS && $result !== SessionCartService::NOT_ENOUGH_STOCK) {
+            $response = $this->createResponse("محصول با موفقیت به سبد خرید اضافه شد", 200, $result);
+        }
+
+        return response()->json($response);
     }
 }

@@ -406,7 +406,6 @@
                     let totalAmount = 0;
 
                     for (item in cartItems.data) {
-                        totalAmount += cartItems.data[item].price;
                         cart += `
                     <li class="single-shopping-cart">
                         <div class="shopping-cart-title">
@@ -424,7 +423,7 @@
                     </li>`
                     }
                     cartItemsSidebar.innerHTML = cart;
-                    totalPriceSection.innerHTML = totalAmount.toLocaleString() + " تومان";
+                    // totalPriceSection.innerHTML = totalAmount.toLocaleString() + " تومان";
                 }
             }
         }

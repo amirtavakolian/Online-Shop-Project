@@ -13,7 +13,7 @@
             </div>
         </div>
     </div>
-
+    <div class="alert alert-success fade" id="increase-result"></div>
     <div class="cart-main-area pt-95 pb-100 text-right" style="direction: rtl;">
         @if(empty($cartItems))
             <div class="container cart-empty-content">
@@ -27,7 +27,7 @@
                 </div>
             </div>
         @else
-            <div class="container">
+            <div class="container cart">
                 <h3 class="cart-page-title"> سبد خرید شما </h3>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-12">
@@ -111,15 +111,34 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-4 col-md-12">
+                            <div class="col-lg-7 col-md-12">
                                 <div class="grand-totall">
                                     <div class="title-wrap">
                                         <h4 class="cart-bottom-title section-bg-gary-cart"> مجموع سفارش </h4>
                                     </div>
+                                    <br>
+                                    <h6>
+                                        لیست سفارشات:
+                                        <br><br>
+                                        <table class="table-bordered col-12">
+                                            <th>عنوان</th>
+                                            <th>قیمت</th>
+                                            <th>تعداد</th>
+                                            <th>قیمت کل</th>
+                                            @foreach(session()->get('cart') as $item)
+                                                <tr>
+                                                    <td>{{ $item['name'] }}</td>
+                                                    <td>{{ number_format($item['price']) }} تومان </td>
+                                                    <td>{{ $item['quantity'] }}</td>
+                                                    <td>{{ number_format($item['totalPrice']) }} تومان </td>
+                                                </tr>
+                                            @endforeach
+                                        </table>
+                                    </h6>
                                     <h5>
                                         مبلغ سفارش :
                                         <span>
-                                            {{ number_format($cartItemsPrice) }}
+                                            {{ number_format(session()->get('totalCartPrice')) }}
                                             تومان
                                         </span>
                                     </h5>
@@ -136,7 +155,7 @@
                                     <h4 class="grand-totall-title">
                                         جمع کل:
                                         <span>
-                                            {{ number_format($cartItemsPrice + 30000)  }}
+                                            {{ number_format(session()->get('totalCartPrice') + 30000)  }}
                                             تومان
                                         </span>
                                     </h4>
@@ -157,6 +176,30 @@
     <script>
         const addToCartSection = document.querySelector("#start-modal");
         const selectedVariant = document.querySelector("#selected-variant");
+        const increaseQuantity = document.querySelector('.cart')
+        increaseQuantity.addEventListener("click", function (e) {
+
+            if (e.target.classList.contains('inc')) {
+                let variantId = e.target.parentElement.parentElement.parentElement.children[6].children[0].attributes[1].value;
+                let route = `{{ route('cart.increase', ['variation' => ':variation']) }}`
+                route = route.replace(':variation', variantId)
+
+                const IncreaseQuantityXhr = new XMLHttpRequest();
+                IncreaseQuantityXhr.open('GET', route)
+                IncreaseQuantityXhr.send();
+
+                IncreaseQuantityXhr.addEventListener("load", function () {
+                    const increaseResult = document.querySelector("#increase-result");
+                    increaseResult.classList.remove('fade');
+                    let response = JSON.parse(IncreaseQuantityXhr.response);
+                    console.log(response);
+                    increaseResult.innerHTML = response.message;
+                    if (response.data !== "") {
+                        window.location.reload();
+                    }
+                });
+            }
+        });
 
         window.addEventListener('load', function () {
             loadCartItems();

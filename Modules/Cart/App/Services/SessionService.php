@@ -2,7 +2,6 @@
 
 namespace Modules\Cart\App\Services;
 
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 class SessionService
@@ -27,5 +26,12 @@ class SessionService
     public function clear($key)
     {
         Session::remove($key);
+    }
+
+    public function increase($key)
+    {
+        $item = $this->get($key);
+        $item['quantity'] += 1;
+        return $item;
     }
 }
