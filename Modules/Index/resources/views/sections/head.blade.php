@@ -11,4 +11,5 @@
     <link rel="stylesheet" href="{{ asset('modules/index/css/plugins.css') }}">
     <link rel="stylesheet" href="{{ asset('modules/index/css/style.css') }}">
     <!-- <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script> -->
+    @yield('head')
 </head>
