@@ -12,6 +12,7 @@
     "Chat": true,
     "RolePermission": true,
     "Ticket": true,
-	"Index": true,
-    "Coworkers": true
+    "Index": true,
+    "Coworkers": true,
+    "Cart": true
 }

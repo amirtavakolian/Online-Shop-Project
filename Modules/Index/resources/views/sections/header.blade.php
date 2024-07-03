@@ -56,65 +56,27 @@
                             <button class="icon-cart-active">
                     <span class="icon-cart">
                       <i class="sli sli-bag"></i>
-                      <span class="count-style">02</span>
+                      <span class="count-style" style="background-color: red">0</span>
                     </span>
-
-
-                                <span class="cart-price">
-                      500,000
-                    </span>
-                                <span>تومان</span>
                             </button>
                             <div class="shopping-cart-content">
                                 <div class="shopping-cart-top">
                                     <a class="cart-close" href="#"><i class="sli sli-close"></i></a>
                                     <h4>سبد خرید</h4>
                                 </div>
-                                <ul>
-                                    <li class="single-shopping-cart">
-                                        <div class="shopping-cart-title">
-                                            <h4><a href="#"> لورم ایپسوم </a></h4>
-                                            <span>1 x 90.00</span>
-                                        </div>
-
-                                        <div class="shopping-cart-img">
-                                            <a href="#"><img alt="" src="assets/img/cart/cart-1.svg"/></a>
-                                            <div class="item-close">
-                                                <a href="#"><i class="sli sli-close"></i></a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="single-shopping-cart">
-                                        <div class="shopping-cart-title">
-                                            <h4><a href="#"> لورم ایپسوم </a></h4>
-                                            <span>1 x 9,000</span>
-                                        </div>
-                                        <div class="shopping-cart-img">
-                                            <a href="#"><img alt="" src="assets/img/cart/cart-2.svg"/></a>
-                                            <div class="item-close">
-                                                <a href="#"><i class="sli sli-close"></i></a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
+                                <ul id="cartItemsHeader"></ul>
                                 <div class="shopping-cart-bottom">
                                     <div
                                         class="shopping-cart-total d-flex justify-content-between align-items-center"
                                         style="direction: rtl;">
-                                        <h4>
-                                            جمع کل :
-                                        </h4>
-                                        <span class="shop-total">
-                          25,000 تومان
-                        </span>
+                                        <h4>جمع کل :</h4>
+                                        <span class="shop-total"></span>
                                     </div>
                                     <div class="shopping-cart-btn btn-hover text-center">
-                                        <a class="default-btn" href="checkout.html">
-                                            ثبت سفارش
+                                        <a class="default-btn" href="{{ route('cart.index') }}">
+                                            مشاهده سبد خرید
                                         </a>
-                                        <a class="default-btn" href="cart-page.html">
-                                            سبد خرید
-                                        </a>
+
                                     </div>
                                 </div>
                             </div>
@@ -195,7 +157,7 @@
                                         </div>
 
                                         <div class="shopping-cart-img">
-                                            <a href="#"><img alt="" src="assets/img/cart/cart-1.svg"/></a>
+                                            <a href="#"><img alt="" src=""/></a>
                                             <div class="item-close">
                                                 <a href="#"><i class="sli sli-close"></i></a>
                                             </div>
@@ -207,7 +169,7 @@
                                             <span>1 x 9,000</span>
                                         </div>
                                         <div class="shopping-cart-img">
-                                            <a href="#"><img alt="" src="assets/img/cart/cart-2.svg"/></a>
+                                            <a href="#"><img alt="" src=""/></a>
                                             <div class="item-close">
                                                 <a href="#"><i class="sli sli-close"></i></a>
                                             </div>
@@ -221,7 +183,7 @@
                                         <h4>
                                             جمع کل :
                                         </h4>
-                                        <span class="shop-total">
+                                        <span class="shop-total1">
                           25,000 تومان
                         </span>
                                     </div>
